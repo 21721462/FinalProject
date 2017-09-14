@@ -1,8 +1,8 @@
 {
   "name": "erpa",
   "version": "1.0.0",
-  "description": "Engineering Project Allocation Softwre",
-  "main": "index.js",
+  "description": "Engineering Project Managment",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,14 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/21721462/CITS3200GroupD.git"
   },
-  "keywords": [
-    "Project",
-    "Allocation"
-  ],
-  "author": "Group D CITS3200",
+  "author": "Group D",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/21721462/CITS3200GroupD/issues"
   },
-  "homepage": "https://github.com/21721462/CITS3200GroupD#readme"
+  "homepage": "https://github.com/21721462/CITS3200GroupD#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1"
+  }
 }
