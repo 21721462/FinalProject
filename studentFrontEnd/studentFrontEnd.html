@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Student Project Allocation Form</title>
+        <link rel="stylesheet" href="../genCSS.css"/>
+        <link rel="stylesheet" href="studentFrontEnd.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="studentFrontEnd.js"></script>
+
+    </head>
+    <body>
+        <div id="title">
+            <img id="UWALogo" src="https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png" alt="UWA LOGO" style="width:900px;"/>
+            <h1>Student Project Preferences Form</h1>
+        </div>
+
+        <form action="/" method="post" encType="multipart/form-data" class="form">
+            <fieldset> <!--personal details-->
+                <legend>Personal Details</legend>
+                <label for="firstName">First Name: </label>
+                <input type="text" id="firstName" name="firstName" required/>
+                <br/>
+                <br/>
+                <label for="lastName">Last Name: </label>
+                <input type="text" id="lastName" name="lastName" required/>
+                <br />
+                <br/>
+                <label for="studentID">Student Number: </label>
+                <input type="number" id="studentID" name="studentID" maxlength="8" 
+                       size="8" min="20000000" max="29999999" required />
+                <br />
+                <br/>
+                <label for="studentPhoneNumber">Phone Number: </label>
+                <input type="text" id="studentPhoneNumber" name="studentPhoneNumber" maxlength="12" /> <br />
+                <br />
+                <label for="discipline">Discipline: </label>
+                <br />
+                <input type="radio" id="discipline" name="discipline" value="electrical" required/> Electrical
+                <input type="radio" id="discipline" name="discipline" value="mechanical" required/> Mechanical
+                <input type="radio" id="discipline" name="discipline" value="chemical" required/> Chemical<br />
+                <input type="radio" id="discipline" name="discipline" value="software" required/>Software
+                <input type="radio" id="discipline" name="discipline" value="civil" required/>Civil
+                <input type="radio" id="discipline" name="discipline" value="Environmental" required/> Environmental
+                
+                
+            </fieldset>
+            <fieldset> <!--Project Preferences and Discipline-->
+                <legend>Project Preferences</legend>
+                <label for="firstPref">First Preference:</label>  
+                <select class="projectOptions" required>
+                    <option value="None">Pick Your Preference</option>
+                </select>
+                <br />
+                <br />
+                <label for="secondPref">Second Preference:</label>  
+                <select class="projectOptions" required>
+                    <option value="None">Pick Your Preference</option>
+                </select>
+                <br />
+                <br />
+                <label for="thirdPref">Third Preference:</label>
+                <select class="projectOptions" required>
+                    <option value="None">Pick Your Preference:</option>
+                </select>
+                <br />
+                <br />
+                <label for="fourthPref">Fourth Preference:</label>
+                <select class="projectOptions" required>
+                    <option value="None">Pick Your Preference</option>
+                </select>
+                <br />
+                <br />
+                <label for="fifthPref">Fifth Preference:</label>
+                <select class="projectOptions" required>
+                    <option value="None">Pick Your Preference</option>
+                </select>
+                <br />
+                <br />
+                <label for="sixthPref">Sixth Preference:</label>
+                <select class="projectOptions" required>
+                    <option value="None">Pick Your Preference</option>
+                </select>
+                
+            </fieldset>  
+            <input type="submit" value="Submit" id="submit">
+            
+        </form>
+    </body>
+
+</html>
