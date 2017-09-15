@@ -1,0 +1,9 @@
+.projectOptions {
+    width: 600px;
+    position: absolute;
+    left: 400px;
+}
+#submit {
+    position: absolute;
+    left: 30px;
+}

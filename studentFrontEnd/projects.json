@@ -1,0 +1,22 @@
+{
+    "Projects" : [{
+        "projectName" : "Project 2",
+        "academicName": "Josh Smith",
+        "supervisors" : "[betty Y, greeny]",
+        "discipline" : "Mechanical", 
+        "maxStudents" : 3
+    }, {
+        "projectName" : "Project 6",
+        "academicName": "Eli Karotkin",
+        "supervisors" : "[bellatrix L, bluey]",
+        "discipline" : "Software", 
+        "maxStudents" : 2
+        
+    }, {
+        "projectName" : "Project 22",
+        "academicName": "Yagimoto Sachiti",
+        "supervisors" : "[Aragord Arathorn, Musy, Jenna]",
+        "discipline" : "[Environmental, chemical]", 
+        "maxStudents" : 2
+    }]
+}
