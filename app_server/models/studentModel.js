@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var studentSchema = Schema({
 	firstName: {type: String, unique: false, required: true},
 	lastName: {type: String, unique: false, required: true},
-	studentID: {type: Number, unique: true, required: true},
+	studentID: {type: String, unique: true, required: true},
 	phoneNumber: {type: Number, unique: true, required: true},
 	discipline: {type: String, unique: false, required: true},
 	wam: {type: Number, unique: false, required: true},

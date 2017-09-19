@@ -6,6 +6,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var json2xls = require('json2xls');
+//need to disccus this
+var bcrypt = require('bcrypt');
+var session = require('express-session');
+var crypto = require('crypto');
 
 //add favicon?
 var logger = require('morgan');
