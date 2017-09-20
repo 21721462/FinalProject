@@ -82,25 +82,27 @@ exports.studentRegisterPost = function(req, res, next)
 		}
 	}
 
+	var StudentUser = {
+		firstName: fname,
+		lastName: lname,
+		studentID: sID,
+		phoneNumber: phoneNum,
+		discipline: studentDiscipline,
+		//wam: <do a serch based on studentID and put wam in
+		assighnedProject: NULL
+	}
+
+	var myStudent = new Student(student);
+	myStudent.save()
+	.then(item => {
+      res.send("Student succesfully Saved to DB");
+    		})
+    .catch(err => {
+      res.status(400).send("Student not save correctly");
+    });
+
+
 }
 
-exports.removeStudent = function (req, res) 
-{
 
-}
-
-exports.editStudent = function (req, res)
-{
-
-}
-
-exports.sendEmailALL = function (req, res)
-{
-
-}
-
-exports.sendEmailIndividual = function (req, res)
-{
-
-}
 

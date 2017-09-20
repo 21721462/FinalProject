@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/21721462/CITS3200GroupD#readme",
   "dependencies": {
-    "body-parser": "^1.18.1"
+    "body-parser": "^1.18.1",
+    "editable-grid": "^2.0.5"
   }
 }

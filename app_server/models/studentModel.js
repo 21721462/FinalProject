@@ -10,11 +10,7 @@ var studentSchema = Schema({
 	phoneNumber: {type: Number, unique: true, required: true},
 	discipline: {type: String, unique: false, required: true},
 	wam: {type: Number, unique: false, required: true},
-	preference01: {type: String, unique: false, required: true },
-	preference02: {type: String, unique: false, required: true },
-	preference03: {type: String, unique: false, required: true },
-	preference04: {type: String, unique: false, required: true },
-	preference05: {type: String, unique: false, required: true },
+	preferences: [{p1: {type: String}, p2: {type: String}, p3: {type: String}, p4: {type: String}, p5: {type: String}, p6: {type: String}}]
 	assighnedProject: [{type: Schema.Types.ObjectId, ref :'Project', unique: true, required: true}]
 });
 
