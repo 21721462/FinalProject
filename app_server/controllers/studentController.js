@@ -28,7 +28,9 @@ exports.submitForm = function (req, res){
 
 exports.studentRegisterGet = function(req, res, next) 
 {
-	res.render('studentFrontEnd', {title: 'Student Project Allocaion From'});
+	fs.readFile('public/javascripts/json/projects.json', 'utf8', function (err, data){
+        res.render('studentFrontEnd', {jsonFile: data});
+    });
 }
 
 exports.studentRegisterPost = function(req, res, next) 
