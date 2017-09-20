@@ -1,0 +1,26 @@
+.form {
+   background-color: aliceblue;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+}
+
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 60px;
+}
+
+#title {
+    
+}
+
+#submit {
+    width: 150px;
+    height: 50px;
+    font-size: 30px;
+    transition-duration: 0.4s;
+}
+
+#submit:hover {
+    background-color: black;
+    color: white;
+}
