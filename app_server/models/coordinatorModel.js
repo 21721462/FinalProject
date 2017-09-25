@@ -8,4 +8,4 @@ var coordinatorSchema = Schema ({
 })
 
 
-UserSchema.plugin(passportLocal);
+coordinatorSchema.plugin(passportLocal);

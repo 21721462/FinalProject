@@ -1,30 +1,10 @@
 var Student = require('../models/studentModel');
+var Project = require('../model/projectModel')
 
-
-exports.submitForm = function (req, res){
-	var fname = req.body.fname;
-	var lname = req.body.lname;
-	var snumber = req.body.snumber;
-	var email = req.body.email;
-	var pnumb = req.body.phonenum;
-	var discip = req.body.discipline;
-	var wamNumber = req.body.discipline
-
-
-	var student = {
-		firstName: fname,
-		lastName: lname,
-		studentNumber: snumber,
-		phoneNumber: phonenum,
-		discipline: discip,
-		wam: wamNumber
-	};
-
-	var myStudent = new Student(student);
-
-	myStudent.save()
+exports.homePageGet = function(req, res, next){
+	projectList = Project.find().exec();
+	res.render('home', {title: 'Home Page'});
 }
-
 
 exports.studentRegisterGet = function(req, res, next) 
 {
@@ -100,8 +80,6 @@ exports.studentRegisterPost = function(req, res, next)
     .catch(err => {
       res.status(400).send("Student not save correctly");
     });
-
-
 }
 
 
