@@ -1,9 +1,12 @@
 var Student = require('../models/studentModel');
-var Project = require('../model/projectModel')
+var Project = require('../models/projectModel')
 
 exports.homePageGet = function(req, res, next){
-	projectList = Project.find().exec();
-	res.render('home', {title: 'Home Page'});
+	projectList = Project.find().exec(function(err,projectList){
+        console.log(JSON.stringify(projectList));
+        res.render('home', {title: 'Home Page', jsonfile: JSON.stringify(projectList)}); 
+    });
+
 }
 
 exports.studentRegisterGet = function(req, res, next) 
