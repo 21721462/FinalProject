@@ -51,7 +51,52 @@ html
                 | Civil
                 input#discipline(type='radio', name='discipline', value='Environmental', required='')
                 |  Environmental
-           
+            fieldset
+                // Project Preferences and Discipline
+                legend Project Preferences
+                -console.log(jsonfile);
+                -var options = JSON.parse(jsonfile);
+                label(for='firstPref') First Preference:
+                select.projectOptions(required='')
+                    option(value='None') Pick Your Preference
+                    each o in options
+                        option(value=o.title) #{o.title}
+            
+                br
+                br
+                label(for='secondPref') Second Preference:
+                select.projectOptions(required='')
+                    option(value='None') Pick Your Preference
+                    each o in options
+                        option(value=o.title) #{o.title}
+                br
+                br
+                label(for='thirdPref') Third Preference:
+                select.projectOptions(required='')
+                    option(value='None') Pick Your Preference:
+                    each o in options
+                        option(value=o.title) #{o.title}
+                br
+                br
+                label(for='fourthPref') Fourth Preference:
+                select.projectOptions(required='')
+                    option(value='None') Pick Your Preference
+                    each o in options
+                        option(value=o.title) #{o.title}
+                br
+                br
+                label(for='fifthPref') Fifth Preference:
+                select.projectOptions(required='')
+                    option(value='None') Pick Your Preference
+                    each o in options
+                        option(value=o.title) #{o.title}
+                br
+                br
+                label(for='sixthPref') Sixth Preference:
+                select.projectOptions(required='')
+                    option(value='None') Pick Your Preference
+                    each o in options
+                        option(value=o.title) #{o.title}
             input#submit(type='submit', value='Submit')
 
 
