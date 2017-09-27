@@ -1,0 +1,73 @@
+html
+  body
+    head
+      link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
+      link(rel='stylesheet', type='text/css', href='AcademicFrontEnd.css')
+      style.
+        * {
+        font-family: 'Ubuntu', sans-serif;
+        }
+    img(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', style='width:900px;')
+    h1 Academic Reasearch Project Form
+    form#AcademicForm1(action='/', method='post', enctype='multipart/form-data')
+      #div1(style='background-color:aliceblue')
+        fieldset#field
+          // personal details
+          // How many projects Selections (Create mutiple of bottom)
+          legend#projNum Project
+          label(for='projTitle')
+            b Project Title:
+          input#projTitle(type='text', name='projTitle', required='')
+          br
+          br
+          label(for='Supervisor1') Primary Supervisor (Surname, first name, title): 
+          input#Supervisor1(type='text', name='Supervisor1', required='')
+          br
+          label(for='Supervisor2') Supervisor 2 (Surname, first name, title): 
+          input#Supervisor2(type='text', name='Supervisor2')
+          br
+          label(for='Supervisor3') Supervisor 3 (Surname, first name, title): 
+          input#Supervisor3(type='text', name='Supervisor3')
+          br
+          br
+          label(for='capacityProj') Capacity of Project (no, of students): 
+          input#capacityProj(size='5', type='text', name='capacityProj', required='')
+          br
+          br
+          label(for='projDescription', required='') Project brief description: 
+          br
+          textarea#projDescription  
+          br
+          br
+          label(for='priorSkill') Prereuisite skills: 
+          input#priorSkill(size='80', type='text', name='priorSkill')
+          br
+          br
+          label(for='discipline') Discipline: 
+          br
+          input#discipline(type='radio', name='discipline', value='electrical', required='')
+          |  Electrical & Electronic
+          input#discipline(type='radio', name='discipline', value='materials', required='')
+          |  Materials
+          input#discipline(type='radio', name='discipline', value='mechanical', required='')
+          |  Mechanical
+          input#discipline(type='radio', name='discipline', value='civil', required='')
+          |  Civil
+          input#discipline(type='radio', name='discipline', value='chemical', required='')
+          |  Chemical 
+          br
+          input#discipline(type='radio', name='discipline', value='software', required='')
+          | Software
+          input#discipline(type='radio', name='discipline', value='environmental', required='')
+          |  Environmental
+          input#discipline(type='radio', name='discipline', value='petroleum', required='')
+          |  Petroleum
+          input#discipline(type='radio', name='discipline', value='oilandgas', required='')
+          |  Oil & Gas
+          input#discipline(type='radio', name='discipline', value='mining', required='')
+          |  Mining
+      input#sub(type='submit', value='Submit')
+      a(href='AcademicFrontEnd.html')
+        input#subandadd(type='submit', value='Submit & Add Another Project')
+    br
+    script(src='scripts/AcademicFrontEnd.js')
