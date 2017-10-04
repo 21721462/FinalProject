@@ -1,0 +1,90 @@
+html 
+    head
+        //link(rel='stylesheet', href='stylesheets/genCSS.css')
+        link(rel='stylesheet', href='stylesheets/coordinatorFrontEnd.css')
+        link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
+        script(src='javascripts/coordinatorFrontEnd.js')
+        script(src='javascripts/jquery-3.2.1.min.js')
+        //script(type='text/javascript', src='javascripts/table_script.js')
+
+    body
+        .mainheader
+            img.header_BG(src='https://secure.csse.uwa.edu.au/newcss/graphics/header-background-02.jpg', alt='')
+            img.UWALogo(src='https://secure.csse.uwa.edu.au/newcss/graphics/uwacrest.png', alt='UWA LOGO')
+            h1 Faculty of Engineering and Mathematical Sciences
+        .pageTitle
+                h2 Faculty of Engineering and Mathematical Science
+                h1 BE & MPE Final Year Project
+        .pageSubTitle
+            h1 Coordinator Tools
+        .tab
+          button.tabLinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
+          button.tabLinks(onclick="openTab(event, 'ProjectList')") Project List
+          button.tabLinks(onclick="openTab(event, 'Allocations')") Allocations
+          
+        #StudentPreferences.tabContent
+            
+            
+        #ProjectList.tabContent
+            h3 Content 2
+        
+        #Allocations.tabContent
+            #wrapper
+              table#AllocationsTable(align='center', cellspacing='2', cellpadding='5', border='1')
+                thead
+                    tr
+                        th(onclick="sortTable(0, 'AllocationsTable')") Student Number
+                        th(onclick="sortTable(1, 'AllocationsTable')") Last Name
+                        th(onclick="sortTable(2, 'AllocationsTable')") First Name
+                        th(onclick="sortTable(3, 'AllocationsTable')") Discipline
+                        th(onclick="sortTable(4, 'AllocationsTable')") Allocation
+                        th(onclick="sortTable(5, 'AllocationsTable')") Supervisor/s
+                tbody
+                    tr#row3_1
+                      td#student_number_row3_1 21749573
+                      td#last_name_row3_1 Smith
+                      td#first_name_row3_1 James
+                      td#specialisation_row3_1 Civil
+                      td#allocation_row3_1 Project 1
+                      td#supervisor_row3_1 Dr. Freeman
+                      td
+                        input#edit_button3_1.edit(type='button', value='Edit', onclick="edit_row('3_1')")
+                        input#save_button3_1.save(type='button', value='Save', onclick="save_row('3_1')")
+                        input.delete(type='button', value='Delete', onclick="delete_row('3_1')")
+                    tr#row3_2
+                      td#student_number_row3_2 21744950
+                      td#last_name_row3_2 Ample
+                      td#first_name_row3_2 Samantha
+                      td#specialisation_row3_2 Mechanical
+                      td#allocation_row3_2 Project 4
+                      td#supervisor_row3_2 Prof Ex.
+                      td
+                        input#edit_button3_2.edit(type='button', value='Edit', onclick="edit_row('3_2')")
+                        input#save_button3_2.save(type='button', value='Save', onclick="save_row('3_2')")
+                        input.delete(type='button', value='Delete', onclick="delete_row('3_2')")
+                    tr#row3_3
+                      td#student_number_row3_3 21740538
+                      td#last_name_row3_3 Breadley
+                      td#first_name_row3_3 Jennifer
+                      td#specialisation_row3_3 Software
+                      td#allocation_row3_3 Project 2
+                      td#supervisor_row3_3 Dr. ABC
+                      td
+                        input#edit_button3_3.edit(type='button', value='Edit', onclick="edit_row('3_3')")
+                        input#save_button3_3.save(type='button', value='Save', onclick="save_row('3_3')")
+                        input.delete(type='button', value='Delete', onclick="delete_row('3_3')")
+                    tr
+                      td
+                        input#new_student_number(type='text')
+                      td
+                        input#new_last_name(type='text')
+                      td
+                        input#new_first_name(type='text')
+                      td
+                        input#new_specialisation(type='text')
+                      td
+                        input#new_allocation(type='text')
+                      td
+                        input#new_supervisor(type='text')
+                      td
+                        input.add(type='button', onclick='add_row("AllocationsTable");', value='Add Row')
