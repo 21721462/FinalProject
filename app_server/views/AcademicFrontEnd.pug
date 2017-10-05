@@ -9,65 +9,59 @@ html
         }
     img(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', style='width:900px;')
     h1 Academic Reasearch Project Form
-    form#AcademicForm1(action='/', method='post', enctype='multipart/form-data')
+    form#AcademicForm1(action='', method='POST')
       #div1(style='background-color:aliceblue')
         fieldset#field
-          // personal details
-          // How many projects Selections (Create mutiple of bottom)
           legend#projNum Project
-          label(for='projTitle')
-            b Project Title:
-          input#projTitle(type='text', name='projTitle', required='')
+          label Project Title:
+          input#projTitle(type='text', name='projTitle', required)
           br
           br
-          label(for='Supervisor1') Primary Supervisor (Surname, first name, title): 
-          input#Supervisor1(type='text', name='Supervisor1', required='')
+          label Primary Supervisor: 
+          input#Supervisor1(type='text', name='Supervisor1', required)
           br
-          label(for='Supervisor2') Supervisor 2 (Surname, first name, title): 
+          label Supervisor 2: 
           input#Supervisor2(type='text', name='Supervisor2')
           br
-          label(for='Supervisor3') Supervisor 3 (Surname, first name, title): 
+          label Supervisor 3: 
           input#Supervisor3(type='text', name='Supervisor3')
           br
           br
-          label(for='capacityProj') Capacity of Project (no, of students): 
-          input#capacityProj(size='5', type='text', name='capacityProj', required='')
+          label Capacity of Project: 
+          input#capacityProj(size='5', type='text', name='capacityProj', required)
           br
           br
-          label(for='projDescription', required='') Project brief description: 
+          label Project brief description: 
           br
-          textarea#projDescription  
+          input#projDescription(type='text',name='projectDescription')
           br
           br
-          label(for='priorSkill') Prereuisite skills: 
+          label Prereuisite skills: 
           input#priorSkill(size='80', type='text', name='priorSkill')
           br
           br
-          label(for='discipline') Discipline: 
+          label Discipline: 
           br
-          input#discipline(type='radio', name='discipline', value='electrical', required='')
+          input#discipline(type='checkbox', name='discipline', value='electrical')
           |  Electrical & Electronic
-          input#discipline(type='radio', name='discipline', value='materials', required='')
+          input#discipline(type='checkbox', name='discipline', value='materials')
           |  Materials
-          input#discipline(type='radio', name='discipline', value='mechanical', required='')
+          input#discipline(type='checkbox', name='discipline', value='mechanical')
           |  Mechanical
-          input#discipline(type='radio', name='discipline', value='civil', required='')
+          input#discipline(type='checkbox', name='discipline', value='civil')
           |  Civil
-          input#discipline(type='radio', name='discipline', value='chemical', required='')
+          input#discipline(type='checkbox', name='discipline', value='chemical')
           |  Chemical 
           br
-          input#discipline(type='radio', name='discipline', value='software', required='')
+          input#discipline(type='checkbox', name='discipline', value='software')
           | Software
-          input#discipline(type='radio', name='discipline', value='environmental', required='')
+          input#discipline(type='checkbox', name='discipline', value='environmental')
           |  Environmental
-          input#discipline(type='radio', name='discipline', value='petroleum', required='')
+          input#discipline(type='checkbox', name='discipline', value='petroleum')
           |  Petroleum
-          input#discipline(type='radio', name='discipline', value='oilandgas', required='')
+          input#discipline(type='checkbox', name='discipline', value='oilandgas')
           |  Oil & Gas
-          input#discipline(type='radio', name='discipline', value='mining', required='')
+          input#discipline(type='checkbox', name='discipline', value='mining')
           |  Mining
-      input#sub(type='submit', value='Submit')
-      a(href='AcademicFrontEnd.html')
-        input#subandadd(type='submit', value='Submit & Add Another Project')
-    br
-    script(src='scripts/AcademicFrontEnd.js')
+        input#sub(type='submit', value='Submit')
+        input#subandadd(type='submit', value='Submit & Add Another Project')  
