@@ -30,8 +30,8 @@ router.get('/student', studentController.studentRegisterGet);
 router.post('/student', studentController.studentRegisterPost);
 
 
-//router.get('/project', projectController.projectRegisterGet);
+router.get('/project', projectController.academicPageGet);
 
-//router.post('/project', projectController.projectRegisterPost);
+router.post('/project', projectController.academicPagePost);
 
 module.exports = router;

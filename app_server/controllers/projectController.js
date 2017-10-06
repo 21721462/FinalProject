@@ -2,7 +2,7 @@ var Project = require('../models/projectModel');
 
 exports.academicPageGet = function(req, res, next)
 {
-	res.render('academic', {title: 'Academic'});
+	res.render('AcademicFrontEnd', {title: 'Academic'});
 }
 
 exports.academicPagePost = function(req, res, next)
