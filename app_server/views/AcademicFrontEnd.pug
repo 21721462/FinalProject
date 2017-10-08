@@ -27,8 +27,12 @@ html
           input#Supervisor3(type='text', name='Supervisor3')
           br
           br
-          label Capacity of Project: 
-          input#capacityProj(size='5', type='text', name='capacityProj', required)
+          label Minimum Capacity of Project: 
+          input#capacityProj(size='5', type='text', name='capacityProjMIN', required)
+          br
+          br
+          label Maximum Capacity of Project: 
+          input#capacityProj(size='5', type='text', name='capacityProjMAX', required)
           br
           br
           label Project brief description: 
@@ -64,4 +68,4 @@ html
           input#discipline(type='checkbox', name='discipline', value='mining')
           |  Mining
         input#sub(type='submit', value='Submit')
-        input#subandadd(type='submit', value='Submit & Add Another Project')  
+        input#subandadd(type='reset', value='Reset')  
