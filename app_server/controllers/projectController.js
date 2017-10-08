@@ -1,10 +1,10 @@
 var Project = require('../models/projectModel');
-
 exports.academicPageGet = function(req, res, next)
 {
 	res.render('AcademicFrontEnd', {title: 'Academic'});
 }
 
+// WORKING
 exports.academicPagePost = function(req, res, next)
 {
 	var ProjectTitle =  req.body.projTitle;
@@ -18,10 +18,12 @@ exports.academicPagePost = function(req, res, next)
 	var superVisor3 = req.body.Supervisor3;
 	
 
-	var ProjectCapacity = req.body.capacityProj;
+	var ProjectCapacityMIN = req.body.capacityProjMIN;
+
+	var ProjectCapacityMAX = req.body.capacityProjMAX;
 	
 
-	console.log(req.body);
+	//console.log(req.body);
 
 
 	var ProjectDesc = req.body.projectDescription;
@@ -37,7 +39,8 @@ exports.academicPagePost = function(req, res, next)
 		supervisor : superVisor,
 		supervisor2 : superVisor2,
 		supervisor3 : superVisor3,
-		capacity : ProjectCapacity,
+		capacityMIN : ProjectCapacityMIN,
+		capacityMAX : ProjectCapacityMAX,
 		description : ProjectDesc,
 		prerequsites : ProjectPrereq,
 		discipline : ProjectDiscipline
@@ -46,7 +49,8 @@ exports.academicPagePost = function(req, res, next)
 	var myProject = new Project(ProjectUpload);
 	myProject.save()
 	.then(item => {
-      res.send("Project succesfully Saved to DB");
+      //res.send("Project succesfully Saved to DB");
+      return res.redirect('back');
     		})
     .catch(err => {
       res.status(400).send("Project not save correctly");
