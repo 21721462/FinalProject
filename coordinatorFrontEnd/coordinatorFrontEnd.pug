@@ -1,9 +1,9 @@
 html 
     head
         //link(rel='stylesheet', href='stylesheets/genCSS.css')
-        link(rel='stylesheet', href='stylesheets/coordinatorFrontEnd.css')
+        link(rel='stylesheet', href='coordinatorFrontEnd.css')
         link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
-        script(src='javascripts/coordinatorFrontEnd.js')
+        script(src='coordinatorFrontEnd.js')
         script(src='javascripts/jquery-3.2.1.min.js')
         //script(type='text/javascript', src='javascripts/table_script.js')
 
@@ -23,10 +23,30 @@ html
           button.tabLinks(onclick="openTab(event, 'Allocations')") Allocations
           
         #StudentPreferences.tabContent
-            
+            table
+                tr
+                    th Student Number
+                    th Given Name
+                    th Family Name
+                    th WAM
+                    th Discipline
+                    th First Preference
+                    th Second Preference
+                    th Third Preference
+                    th Fourth Preference
+                    th Fifth Preference
+                    th Sixth Preference
             
         #ProjectList.tabContent
-            h3 Content 2
+            table
+                tr
+                    th Project Title
+                    th Supervisor
+                    th Minimum Capacity
+                    th Maximum Capacity
+                    th Project Description
+                    th Prerequisite Skills
+                    th Discipline
         
         #Allocations.tabContent
             #wrapper
