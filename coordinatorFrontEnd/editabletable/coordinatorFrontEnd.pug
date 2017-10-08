@@ -1,0 +1,155 @@
+//- // npm install pug-cli -g
+//- // pug coordinatorFrontEnd.pug
+
+//- html 
+//-	 head
+//-		 link(rel='stylesheet', href='/stylesheets/style.css')
+//-		 script(src='/javascripts/coordinatorFrontEnd.js')
+//-	 body
+//-		 div
+//-			 .tab
+//-			   on.tablinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
+//-			   button.tablinks(onclick="openTab(event, 'ProjectList')") Project List
+//-			   button.tablinks(onclick="openTab(event, 'Allocations')") Allocations
+//-			 #StudentPreferences.tabcontent
+//-				 h3 Content 1
+//-			 #ProjectList.tabcontent
+//-				 h3 Content 2 
+//-			 #Allocations.tabcontent
+//-				 .table
+//-					 table
+//-					   thead
+//-						 tr
+//-						   th Student Number
+//-						   th Last Name
+//-						   th First Name
+//-						   th Specialisation
+//-						   th Allocation
+//-						   th Supervisor/s
+//-						 // insert JSON object parse
+//-						 // dynamically add to table
+
+
+html
+	head
+		title Student Project Allocation Form
+		link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css')
+		link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css')
+		script(src='//code.jquery.com/jquery-1.12.4.js')
+		script(src='https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js')
+		script(src='https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js')
+		script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js')
+		script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js')
+		script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js')
+		script(src='https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js')
+		script(src="/javascripts/script.js")
+
+	body
+
+		-var students = JSON.parse(jsonthing);
+		table#example.display.nowrap(cellspacing='0', width='100%')
+			thead
+				tr
+					th StudentID
+					th Last Name
+					th First Name
+					th Project Allocation
+					th
+			tfoot
+				tr
+					th StudentID
+					th Last Name
+					th First Name
+					th Project Allocation
+					th
+			tbody
+				each o in students
+					tr(id=o._id, for=o._id, name=o.id)
+						td(contenteditable="") #{o.studentID}
+						td(contenteditable="") #{o.lastName}
+						td(contenteditable="") #{o.firstName}
+						td(contenteditable="") #{o.assignedProject.title}
+						td
+							img.btnEdit(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
+							img.btnDelete(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
+		script.
+			var t = $('#example').DataTable( {
+			dom: 'Bfrtip',
+			buttons: [
+			'excel', 'csv',
+			{
+			text: 'Add',
+			action: function ( e, dt, node, config ) {
+			$("#example tbody").append(
+			"<tr>"+
+			"<td><input type='text'/></td>"+
+			"<td><input type='text'/></td>"+
+			"<td><input type='text'/></td>"+
+			"<td><input type='text'/></td>"+
+			"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSave'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/></td>"+
+			"</tr>");
+			$(".btnSave").bind("click", Save);
+			$(".btnDelete").bind("click", Delete);
+			}
+			}
+			], select: true,
+			} );
+		script.
+			function Save(){
+			var par = $(this).parent().parent(); //tr
+			var tdstudentID = par.children("td:nth-child(1)");
+			var tdlastName = par.children("td:nth-child(2)");
+			var tdfirstName = par.children("td:nth-child(3)");
+			var tdprojectAllocation = par.children("td:nth-child(4)");
+			var tdButtons = par.children("td:nth-child(5)");
+			tdstudentID.html(tdstudentID.children("input[type=text]").val());
+			tdlastName.html(tdlastName.children("input[type=text]").val());
+			tdfirstName.html(tdfirstName.children("input[type=text]").val());
+			tdprojectAllocation.html(tdprojectAllocation.children("input[type=text]").val());
+			tdButtons.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEdit'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/>");
+			$(".btnEdit").bind("click", Edit);
+			$(".btnDelete").bind("click", Delete); };
+		script.
+			function Edit(){
+			var par = $(this).parent().parent(); //tr
+			var tdstudentID = par.children("td:nth-child(1)");
+			var tdlastName = par.children("td:nth-child(2)");
+			var tdfirstName = par.children("td:nth-child(3)");
+			var tdprojectAllocation = par.children("td:nth-child(4)");
+			var tdButtons = par.children("td:nth-child(5)");
+			tdstudentID.html("<input type='text' id='txtstudentID' value='"+tdstudentID.html()+"'/>");
+			tdlastName.html("<input type='text' id='txtlastName' value='"+tdlastName.html()+"'/>");
+			tdfirstName.html("<input type='text' id='txtfirstName' value='"+tdfirstName.html()+"'/>");
+			tdprojectAllocation.html("<input type='text' id='txtprojectAllocation' value='"+tdprojectAllocation.html()+"'/>");
+			tdButtons.html("<img src='http://gkisschool.com/img/saveHS.png' class='btnSave'/>");
+			$(".btnSave").bind("click", Save);
+			$(".btnEdit").bind("click", Edit);
+			$(".btnDelete").bind("click", Delete); };
+		script.
+			function Delete(){
+			var par = $(this).parent().parent(); //tr
+			var rowId = $(this).parent().parent().attr('id');
+			
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost:3000/coordinatordeleterow',
+				data: {rowID: rowId}
+			})
+			//deleteRow(rowId);
+
+
+			console.log(rowId);
+
+			par.remove(); };
+		script.
+			$(function(){ //Add, Save, Edit and Delete functions code
+			$(".btnEdit").bind("click", Edit);
+			$(".btnDelete").bind("click", Delete); });
+
+
+			//1. delete row in database with old details
+			//2. add new row with current details
+
