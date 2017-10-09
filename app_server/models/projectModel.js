@@ -9,8 +9,9 @@ var projectSchema = Schema({
 	capacityMIN: {type: Number, unique: false, required:true},
 	capacityMAX: {type: Number, unique: false, required:true},
 	description: {type: String, unique: false, required: true},
-	prerequsites: {type: String, unique: false, required: false},
+	prerequisites: {type: String, unique: false, required: false},
 	discipline: [{type: String, unique: false, required: false}],
+	timeStamp:{type: String, unique: false, required: true}
 })
 
 
