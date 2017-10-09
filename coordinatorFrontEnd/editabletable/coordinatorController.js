@@ -10,8 +10,6 @@ $ = require('jquery');
 // Display the cooridnator main page
 exports.coordinatorLogin = function(req, res, next) {
 	Student.find().exec(function(err, studentList){
-    	console.log(studentList);
-    	console.log(JSON.stringify(studentList));
 		res.render('coordinatorFrontEnd',{title: "Coordinator Front End", jsonthing: JSON.stringify(studentList)});
 	});
 }
@@ -45,16 +43,66 @@ exports.sendEmailIndividual = function (req, res)
 
 exports.deleteRow = function(req, res){
 	var row = req.body.rowID;
-	console.log(row);
+	Student.find({'_id': row}).exec(function(err, doc){
+				console.log(JSON.stringify(doc));
+				//doc.remove();
+			});
+	Student.find({'_id': row}).remove().exec();
+	
+}
+
+
+exports.editRow = function(req, res){
+	var row = req.body.rowID;
+	//Student.find({'_id': row}).remove().exec();
+	//console.log("old removed");
+	Student.findOne({'_id': row}, function(err, student){
+		student.firstName = req.body.fName;
+		student.lastName = req.body.lName;
+		student.studentID = req.body.ID;
+		student.assignedProject = req.body.projAlloc;
+		console.log(student);
+		student.save(function(err){
+			if(err){
+			console.log(err);
+		}
+		else console.log("Success");
+		}).then();
+
+				return;
+	});
+// 	var sID = req.body.ID;
+// 	var lNameLocal = req.body.lName;
+// 	var fNameLocal = req.body.fName;
+// 	var projectAllocation = req.body.projAlloc;
+// 	//console.log("variables collected");
+// 	console.log(sID);
+// 	console.log(lNameLocal);
+// 	console.log(fNameLocal);
+// 	var newData = {
+// 		firstName: fNameLocal,
+// 		lastName: lNameLocal,
+// 		studentID: sID
+// 	}
+// 	var toSend = new Student(newData);
+// 	toSend.save(function(err){
+//       if(err){
+//            console.log(err);
+//            return;
+//       }
+
+//       res.json({ token: generateToken(user), user: user });
+// });
+
+	//Student.add({firstName: fNameLocal, lastName: lNameLocal, studentID: sID}).exec();//, assignedProject: projectAllocation})
+	console.log("new row added");
+}
+
+var remove = function(rowNumber){
 	Student.find({'_id': row}).exec(function(err, doc){
 				console.log(JSON.stringify(doc));
 				//doc.remove();
 			});
 	Student.find({'_id': row}).remove().exec();
 }
-			// var toDelete = Student.findOne({'_id': rowID}).exec(function(err, doc){
-			// 	doc.remove();
-			// };
-
-
 // Display Student Front End

@@ -68,10 +68,10 @@ html
 			tbody
 				each o in students
 					tr(id=o._id, for=o._id, name=o.id)
-						td(contenteditable="") #{o.studentID}
-						td(contenteditable="") #{o.lastName}
-						td(contenteditable="") #{o.firstName}
-						td(contenteditable="") #{o.assignedProject.title}
+						td() #{o.studentID}
+						td() #{o.lastName}
+						td() #{o.firstName}
+						td() #{o.assignedProject}
 						td
 							img.btnEdit(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
 							img.btnDelete(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
@@ -100,11 +100,24 @@ html
 		script.
 			function Save(){
 			var par = $(this).parent().parent(); //tr
+			var row = $(this).parent().parent().attr('id');
 			var tdstudentID = par.children("td:nth-child(1)");
+			var studentID = tdstudentID.children().val();
 			var tdlastName = par.children("td:nth-child(2)");
+			var lastName = tdlastName.children().val();
 			var tdfirstName = par.children("td:nth-child(3)");
+			var firstName = tdfirstName.children().val();
 			var tdprojectAllocation = par.children("td:nth-child(4)");
+			var projectAllocation = tdprojectAllocation.children().val();
 			var tdButtons = par.children("td:nth-child(5)");
+			console.log(studentID);
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost:3000/coordinatorsaverow/',
+				//- data: [{rowID: row}, {ID: tdstudentID}, {lName: tdlastName}, {fName: tdfirstName}, {projAlloc: tdprojectAllocation}]
+				data: {rowID: row, ID: studentID, lName: lastName, fName: firstName, projAlloc: projectAllocation}
+			});
+
 			tdstudentID.html(tdstudentID.children("input[type=text]").val());
 			tdlastName.html(tdlastName.children("input[type=text]").val());
 			tdfirstName.html(tdfirstName.children("input[type=text]").val());
@@ -112,6 +125,7 @@ html
 			tdButtons.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEdit'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/>");
 			$(".btnEdit").bind("click", Edit);
 			$(".btnDelete").bind("click", Delete); };
+
 		script.
 			function Edit(){
 			var par = $(this).parent().parent(); //tr
@@ -138,7 +152,6 @@ html
 				url: 'http://localhost:3000/coordinatordeleterow',
 				data: {rowID: rowId}
 			})
-			//deleteRow(rowId);
 
 
 			console.log(rowId);
