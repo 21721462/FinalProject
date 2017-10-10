@@ -11,7 +11,8 @@ var projectSchema = Schema({
 	description: {type: String, unique: false, required: true},
 	prerequisites: {type: String, unique: false, required: false},
 	discipline: [{type: String, unique: false, required: false}],
-	timeStamp:{type: String, unique: false, required: true}
+	timeStamp:{type: String, unique: false, required: true},
+	numAllocated: {type: Number, unique: false, required: true}
 })
 
 
