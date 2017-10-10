@@ -11,7 +11,7 @@ var studentSchema = Schema({
 	discipline: {type: String, unique: false, required: true},
 	wam: {type: Number, unique: false, required: true},
 	preferences: [{type: String, unique: false, required: true}],
-	assignedProject: [{type: Schema.Types.ObjectId, ref :'Project', unique: false, required: true}]
+	assignedProject: {type: String, unique: false, required: true}
 });
 
 
