@@ -39,7 +39,8 @@ exports.sendEmailIndividual = function (req, res)
 }
 
 exports.allocateProjects = function (req, res) {
-	Project.update({}, { $set: { numAllocated: "0" }}, {multi: true}, function (err) {if(err) return handleError(err);}); //DEBUG
+	Project.update({}, { $set: { numAllocated: "0" }}, {multi: true}, function (err) {if(err) return handleError(err);}); //Reset numAlloc
+	Student.update({_id: student.id}, { $set: { assignedProject: "" }}, function (err) {if(err) return handleError(err);}); //Reset assignedProj
 	Student.find({}).sort({'wam' : -1}).exec(function (serr, students) {
 		if(serr) return serr;
 		Project.find({}).exec(function (perr, projects) {
@@ -64,6 +65,7 @@ exports.allocateProjects = function (req, res) {
 								} //Check capacity
 								else console.log("Project full!"); //DEBUG
 							} //Discipline match
+							else console.log("Discipline mismatch!"); //DEBUG
 						} //Preference match
 					} //Project iterate
 					if(allocated) break;
