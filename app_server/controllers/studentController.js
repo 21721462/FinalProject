@@ -1,84 +1,92 @@
 var Student = require('../models/studentModel');
-var Project = require('../models/projectModel')
+var Project = require('../models/projectModel');
+var node_xj = require('xls-to-json');
+var csv = require('csvtojson');
+var converter = require('csvtojson').Converter;
 
-exports.homePageGet = function(req, res, next){
-	projectList = Project.find().exec(function(err,projectList){
-        console.log(JSON.stringify(projectList));
-        res.render('home', {title: 'Home Page', jsonfile: JSON.stringify(projectList)}); 
-    });
+var SWAM;
 
-}
+const csvFilePath = __dirname + '/ex.csv';
+
+var conv = new converter({});
+
+conv.fromFile(csvFilePath, function (err, result)
+	{
+		if (err)
+		{
+
+		}
+
+		SWAM = result;
+		console.log(SWAM);
+	});
 
 exports.studentRegisterGet = function(req, res, next) 
 {
-	res.render('studentFrontEnd', {title: 'Student Project Allocaion From'});
+	Project.find({}, function (err, proj)
+	{
+		if (err)
+		{
+			res.status(400).send("Could not access project list");
+		}
+		else 
+		{
+			//console.log(proj);
+			res.render('StudentFrontEnd', {title: 'Student Project Allocaion From', projects : proj});
+		}
+	});
 }
 
 exports.studentRegisterPost = function(req, res, next) 
 {
 	var fname = req.body.firstName;
-	if (/\d/g.test(fname) && /\s/g.test(fname))
-	{
-		req.session.registerError = 'Name cannot contain digits or whitespaces';
-		return res.redirect('back');
-	}
-
+	
+	
 	var lname = req.body.lastName;
-	if (/\d/g.test(lname) && /\s/g.test(fname))
-	{
-		req.session.registerError = 'Surname cannot contain digits';
-		return res.redirect('back');
-	}
+	
 
 	var sID = req.body.studentID;
-	if(sID.length != 8 && /\D/g.test(sID) && /\s/g.test(sID))
-	{
-		req.session.registerError = 'Student ID must be of length 8 with no word characters and whitespaces';
-		return res.redirect('back');
-	}
+	
 
-	var phoneNum = req.body.studentPhoneNumber.replace(/ /g,"");
-	if(/\D/g.test(phoneNum) && phoneNum.length != 10)
-	{
-		req.session.registerError = 'Phone Number cannout include non-digit characters and must be of length 10';
-		return res.redirect('back');
-	}
-
+	var phoneNum = req.body.studentPhoneNumber;
+	
 	var studentDiscipline = req.body.discipline;
 
-	var studentPreferences = [];
-	studentPreferences.push(req.body.pref1);
-	studentPreferences.push(req.body.pref2);
-	studentPreferences.push(req.body.pref3);
-	studentPreferences.push(req.body.pref4);
-	studentPreferences.push(req.body.pref5);
-	studentPreferences.push(req.body.pref6);
+	var studentPreferences = req.body.options;
 
+	console.log(sID);
+	console.log(SWAM[5].Person_ID);
 
-	for (var i = 0; i < 6; i++)
+	var studentWam = 0;
+
+	for (var w in SWAM)
 	{
-		var projectDisp = Project.find({"title":studentPreferences[i]});
-		if (projectDisp.discipline != studentDiscipline)
+		if (SWAM[w].Person_ID == sID)
 		{
-			req.session.registerError = 'You must pick project with ';
-			return res.redirect('back');
+			studentWam = SWAM[w].Course_WAM; 
+			console.log(SWAM[w].Course_WAM);
 		}
 	}
+	
 
+	console.log(req.body);
+	
 	var StudentUser = {
 		firstName: fname,
 		lastName: lname,
 		studentID: sID,
 		phoneNumber: phoneNum,
 		discipline: studentDiscipline,
-		//wam: <do a serch based on studentID and put wam in
-		assighnedProject: NULL
+		wam: studentWam,
+		preferences: studentPreferences,
+		assignedProject: ""
 	}
 
-	var myStudent = new Student(student);
+	var myStudent = new Student(StudentUser);
 	myStudent.save()
 	.then(item => {
-      res.send("Student succesfully Saved to DB");
+      //res.send("Project succesfully Saved to DB");
+      return res.redirect('back');
     		})
     .catch(err => {
       res.status(400).send("Student not save correctly");
