@@ -1,4 +1,5 @@
 var Project = require('../models/projectModel');
+var flash = require('connect-flash');
 exports.academicPageGet = function(req, res, next)
 {
 	res.render('AcademicFrontEnd', {title: 'Academic'});
@@ -16,6 +17,10 @@ exports.academicPagePost = function(req, res, next)
 	
 
 	var superVisor3 = req.body.Supervisor3;
+
+	var superVisor4 = req.body.Supervisor4;
+
+	var superVisor5 = req.body.Supervisor5;
 	
 
 	var ProjectCapacityMIN = req.body.capacityProjMIN;
@@ -32,18 +37,24 @@ exports.academicPagePost = function(req, res, next)
 
 	var ProjectPrereq = req.body.priorSkill;
 
+	var time = new Date().toLocaleString().toString();
 
+	//console.log(time);
 
 	var ProjectUpload = {
 		title : ProjectTitle,
 		supervisor : superVisor,
 		supervisor2 : superVisor2,
 		supervisor3 : superVisor3,
+		supervisor4 : superVisor4,
+		supervisor5 : superVisor5,
 		capacityMIN : ProjectCapacityMIN,
 		capacityMAX : ProjectCapacityMAX,
 		description : ProjectDesc,
 		prerequsites : ProjectPrereq,
-		discipline : ProjectDiscipline
+		discipline : ProjectDiscipline,
+		timeStamp : time,
+		numAllocated : 0
 	}
 
 	var myProject = new Project(ProjectUpload);
