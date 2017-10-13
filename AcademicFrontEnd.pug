@@ -1,0 +1,82 @@
+html
+  
+    head
+      link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
+      link(rel='stylesheet', type='text/css', href='AcademicFrontEnd.css')
+      style.
+        * {
+        font-family: 'Ubuntu', sans-serif;
+        }
+      img(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', style='width:900px;')
+    body
+    h1 Academic Reasearch Project Form
+    form#AcademicForm1(action='', method='POST')
+      #div1(style='background-color:aliceblue')
+        fieldset#field
+          legend#projNum Project
+          label Project Title:
+          input#projTitle(type='text', name='projTitle', required)
+          br
+          br
+          label Primary Supervisor: 
+          input#Supervisor1(type='text', name='Supervisor1', required)
+          br
+          br
+          label Supervisor 2: 
+          input#Supervisor2(type='text', name='Supervisor2')
+          br
+          br
+          label Supervisor 3: 
+          input#Supervisor3(type='text', name='Supervisor3')
+          br
+          br
+          label Supervisor 4: 
+          input#Supervisor3(type='text', name='Supervisor4')
+          br
+          br
+          label Supervisor 5: 
+          input#Supervisor3(type='text', name='Supervisor5')
+          br
+          br
+          label Minimum Capacity of Project: 
+          input#capacityProj(size='5', type='text', name='capacityProjMIN', required)
+          br
+          br
+          label Maximum Capacity of Project: 
+          input#capacityProj(size='5', type='text', name='capacityProjMAX', required)
+          br
+          br
+          label Project brief description: 
+          br
+          input#projDescription(type='text',name='projectDescription')
+          br
+          br
+          label Prereuisite skills: 
+          input#priorSkill(size='80', type='text', name='priorSkill')
+          br
+          br
+          label Discipline: 
+          br
+          input#discipline(type='checkbox', name='discipline', value='electrical')
+          |  Electrical & Electronic
+          input#discipline(type='checkbox', name='discipline', value='materials')
+          |  Materials
+          input#discipline(type='checkbox', name='discipline', value='mechanical')
+          |  Mechanical
+          input#discipline(type='checkbox', name='discipline', value='civil')
+          |  Civil
+          input#discipline(type='checkbox', name='discipline', value='chemical')
+          |  Chemical 
+          br
+          input#discipline(type='checkbox', name='discipline', value='software')
+          | Software
+          input#discipline(type='checkbox', name='discipline', value='environmental')
+          |  Environmental
+          input#discipline(type='checkbox', name='discipline', value='petroleum')
+          |  Petroleum
+          input#discipline(type='checkbox', name='discipline', value='oilandgas')
+          |  Oil & Gas
+          input#discipline(type='checkbox', name='discipline', value='mining')
+          |  Mining
+        input#sub(type='submit', value='Submit')
+        input#subandadd(type='reset', value='Reset')  

@@ -1,0 +1,91 @@
+html
+    head
+        title Student Projects Allocation Form
+        link(rel='stylesheet', href='/stylesheets/genCSS.css')
+        link(rel='stylesheet', href='/stylesheets/studentFrontEnd.css')
+        link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        script(src='studentFrontEnd.js')
+        
+    body
+        #title
+        img#UWALogo(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', alt='UWA LOGO', style='width:900px;')
+        h1 Student Projects Preferences Form
+        form(action='', method='POST')
+            fieldset
+                legend Personal Details
+                label First Name: 
+                input#firstName(type='text', name='firstName', required)
+                br
+                br
+                label Last Name: 
+                input#lastName(type='text', name='lastName', required)
+                br
+                br
+                label Student Number: 
+                input#studentID(type='number', name='studentID', maxlength='8', size='8', required)
+                br
+                br
+                label Phone Number: 
+                input#studentPhoneNumber(type='text', name='studentPhoneNumber', maxlength='12')
+                br
+                br
+                label Discipline: 
+                br
+                input#discipline(type='radio', name='discipline', value='electrical', required)
+                |  Electrical 
+                input#discipline(type='radio', name='discipline', value='mechanical', required)
+                |  Mechanical 
+                input#discipline(type='radio', name='discipline', value='chemical', required)
+                |  Chemical 
+                input#discipline(type='radio', name='discipline', value='software', required)
+                | Software 
+                input#discipline(type='radio', name='discipline', value='civil', required)
+                | Civil 
+                input#discipline(type='radio', name='discipline', value='Environmental', required)
+                |  Environmental 
+            fieldset
+                
+                legend Projects Preferences
+                
+                label First Preference:
+                select(name='options', required)
+                    option(value='None') Pick Your Preference
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
+                br
+                br
+                label Second Preference:
+                select(name='options', required)
+                    option(value='None') Pick Your Preference
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
+                br
+                br
+                label Third Preference:
+                select(name='options', required)
+                    option(value='None') Pick Your Preference:
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
+                br
+                br
+                label Fourth Preference:
+                select(name='options', required)
+                    option(value='None') Pick Your Preference
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
+                br
+                br
+                label Fifth Preference:
+                select(name='options', required)
+                    option(value='None') Pick Your Preference
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
+                br
+                br
+                label Sixth Preference:
+                select(name='options', required)
+                    option(value='None') Pick Your Preference
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title}
+            input#submit(type='submit', value='Submit')
