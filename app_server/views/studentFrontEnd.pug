@@ -1,99 +1,94 @@
-//extends layout
-//
-//block content
-//  h1= title
-//  p Welcome to #{title}
-
-
 html
     head
-        title Student Project Allocation Form
+        title Student Projects Allocation Form
         link(rel='stylesheet', href='/stylesheets/genCSS.css')
         link(rel='stylesheet', href='/stylesheets/studentFrontEnd.css')
         link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
         script(src='studentFrontEnd.js')
+        
     body
         #title
         img#UWALogo(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', alt='UWA LOGO', style='width:900px;')
-        h1 Student Project Preferences Form
-        form.form(action='/', method='post', enctype='multipart/form-data')
+        h1 Student Projects Preferences Form
+        form(action='', method='POST')
             fieldset
+                p#errorprint #{err}
                 legend Personal Details
-                label(for='firstName') First Name: 
-                input#firstName(type='text', name='firstName', required='')
+                label First Name: 
+                input#firstName(type='text', name='firstName', required)
                 br
                 br
-                label(for='lastName') Last Name: 
-                input#lastName(type='text', name='lastName', required='')
+                label Last Name: 
+                input#lastName(type='text', name='lastName', required)
                 br
                 br
-                label(for='studentID') Student Number: 
-                input#studentID(type='number', name='studentID', maxlength='8', size='8', min='20000000', max='29999999', required='')
+                label Student Number: 
+                input#studentID(type='number', name='studentID', maxlength='8', size='8', required)
                 br
                 br
-                label(for='studentPhoneNumber') Phone Number: 
-                input#studentPhoneNumber(type='text', name='studentPhoneNumber', maxlength='12')
+                label Phone Number: 
+                input#studentPhoneNumber(type='text', name='studentPhoneNumber', minlength='10', maxlength='12', required)
                 br
                 br
-                label(for='discipline') Discipline: 
+                label Discipline: 
                 br
-                input#discipline(type='radio', name='discipline', value='electrical', required='')
-                |  Electrical
-                input#discipline(type='radio', name='discipline', value='mechanical', required='')
-                |  Mechanical
-                input#discipline(type='radio', name='discipline', value='chemical', required='')
-                |  Chemical
-                br
-                input#discipline(type='radio', name='discipline', value='software', required='')
-                | Software
-                input#discipline(type='radio', name='discipline', value='civil', required='')
-                | Civil
-                input#discipline(type='radio', name='discipline', value='Environmental', required='')
-                |  Environmental
+                input#discipline(type='radio', name='discipline', value='electrical', required)
+                |  Electrical 
+                input#discipline(type='radio', name='discipline', value='mechanical', required)
+                |  Mechanical 
+                input#discipline(type='radio', name='discipline', value='chemical', required)
+                |  Chemical 
+                input#discipline(type='radio', name='discipline', value='software', required)
+                | Software 
+                input#discipline(type='radio', name='discipline', value='civil', required)
+                | Civil 
+                input#discipline(type='radio', name='discipline', value='Environmental', required)
+                |  Environmental 
             fieldset
-                // Project Preferences and Discipline
-                legend Project Preferences
-                -var options = JSON.parse(jsonFile);
-                label(for='firstPref') First Preference:
-                select.projectOptions(required='')
+                
+                legend Projects Preferences
+                p #{preferrs}
+
+                label First Preference:
+                select(name='options', required)
+                    option(value='None', required) Pick Your Preference
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
+                br
+                br
+                label Second Preference:
+                select(name='options')
                     option(value='None') Pick Your Preference
-                    each o in options.Projects
-                        option(value=o.projectName) #{o.projectName}
-            
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
                 br
                 br
-                label(for='secondPref') Second Preference:
-                select.projectOptions(required='')
-                    option(value='None') Pick Your Preference
-                    each o in options.Projects
-                        option(value=o.projectName) #{o.projectName}
-                br
-                br
-                label(for='thirdPref') Third Preference:
-                select.projectOptions(required='')
+                label Third Preference:
+                select(name='options', required)
                     option(value='None') Pick Your Preference:
-                    each o in options.Projects
-                        option(value=o.projectName) #{o.projectName}
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
                 br
                 br
-                label(for='fourthPref') Fourth Preference:
-                select.projectOptions(required='')
+                label Fourth Preference:
+                select(name='options', required)
                     option(value='None') Pick Your Preference
-                    each o in options.Projects
-                        option(value=o.projectName) #{o.projectName}
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
                 br
                 br
-                label(for='fifthPref') Fifth Preference:
-                select.projectOptions(required='')
+                label Fifth Preference:
+                select(name='options', required)
                     option(value='None') Pick Your Preference
-                    each o in options.Projects
-                        option(value=o.projectName) #{o.projectName}
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title} 
                 br
                 br
-                label(for='sixthPref') Sixth Preference:
-                select.projectOptions(required='')
+                label Sixth Preference:
+                select(name='options', required)
                     option(value='None') Pick Your Preference
-                    each o in options.Projects
-                        option(value=o.projectName) #{o.projectName}
+                     each o in projects
+                        option(value=o.title) #{o.discipline} #{o.title}
             input#submit(type='submit', value='Submit')
+            input#reset(type='reset', value='Reset')
