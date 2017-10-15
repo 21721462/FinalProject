@@ -1,8 +1,11 @@
 var Project = require('../models/projectModel');
-var flash = require('connect-flash');
+
+
+var errormsg = "";
 exports.academicPageGet = function(req, res, next)
 {
-	res.render('AcademicFrontEnd', {title: 'Academic'});
+	res.render('AcademicFrontEnd', {title: 'Academic', error: errormsg});
+	errormsg = "";
 }
 
 // WORKING
@@ -28,18 +31,24 @@ exports.academicPagePost = function(req, res, next)
 	var ProjectCapacityMAX = req.body.capacityProjMAX;
 	
 
-	//console.log(req.body);
+	console.log(req.body);
 
 
 	var ProjectDesc = req.body.projectDescription;
 
 	var ProjectDiscipline = req.body.discipline;
 
+	if (!ProjectDiscipline)
+	{
+		errormsg = "Please select at least one discipline.";
+		return res.redirect('back');
+	}
+
 	var ProjectPrereq = req.body.priorSkill;
 
 	var time = new Date().toLocaleString().toString();
 
-	//console.log(time);
+	console.log(time);
 
 	var ProjectUpload = {
 		title : ProjectTitle,
@@ -60,7 +69,7 @@ exports.academicPagePost = function(req, res, next)
 	var myProject = new Project(ProjectUpload);
 	myProject.save()
 	.then(item => {
-      //res.send("Project succesfully Saved to DB");
+	  errormsg = "Project saved successfully";
       return res.redirect('back');
     		})
     .catch(err => {
