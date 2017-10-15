@@ -5,6 +5,8 @@ var csv = require('csvtojson');
 var converter = require('csvtojson').Converter;
 
 var SWAM;
+var error = "";
+var preferror = "";
 
 const csvFilePath = __dirname + '/ex.csv';
 
@@ -23,7 +25,7 @@ conv.fromFile(csvFilePath, function (err, result)
 
 exports.studentRegisterGet = function(req, res, next) 
 {
-	Project.find({}, function (err, proj)
+	Project.find({}).sort({'discipline': 1}).exec(function (err, proj)
 	{
 		if (err)
 		{
@@ -31,14 +33,17 @@ exports.studentRegisterGet = function(req, res, next)
 		}
 		else 
 		{
-			//console.log(proj);
-			res.render('StudentFrontEnd', {title: 'Student Project Allocaion From', projects : proj});
+			res.render('StudentFrontEnd', {title: 'Student Project Allocation From', projects : proj, err: error, preferrs : preferror});
+			error = "";
+			preferror = "";
 		}
 	});
 }
 
 exports.studentRegisterPost = function(req, res, next) 
 {
+
+
 	var fname = req.body.firstName;
 	
 	
@@ -55,6 +60,7 @@ exports.studentRegisterPost = function(req, res, next)
 	var studentPreferences = req.body.options;
 
 	console.log(sID);
+
 	console.log(SWAM[5].Person_ID);
 
 	var studentWam = 0;
@@ -68,8 +74,56 @@ exports.studentRegisterPost = function(req, res, next)
 		}
 	}
 	
+	Student.find({studentID : sID}, function(err, studentCheck)
+	{
+		if(studentCheck.length)
+		{
+			error = "This student has already been registered.";
+			return res.redirect('back');
+
+		}
+	})
+
+	Student.find({phoneNumber : phoneNum}, function(err, phoneCheck)
+	{
+		if(phoneCheck.length)
+		{
+			error = "This phone number has been taken.";
+			return res.redirect('back');
+
+		}
+	})
 
 	console.log(req.body);
+	var noneCount = 0;
+	var prefCheck = Object.create(null);
+	for (p in studentPreferences)
+	{	
+		if(studentPreferences[p] != "None")
+		{
+			var check = studentPreferences[p];
+			if(check in prefCheck)
+			{
+				
+				preferror = "Student cannot choose the same project twice.";
+				return res.redirect('back');
+			}
+
+			prefCheck[check] = true;
+		}
+		else 
+		{
+			noneCount++;
+		}
+	}
+
+	if (noneCount == 6 )
+	{
+		preferror = "Please select at least one preference. ";
+		return res.redirect('back');
+	}
+
+	
 	
 	var StudentUser = {
 		firstName: fname,
@@ -85,7 +139,7 @@ exports.studentRegisterPost = function(req, res, next)
 	var myStudent = new Student(StudentUser);
 	myStudent.save()
 	.then(item => {
-      //res.send("Project succesfully Saved to DB");
+      error = "Student has been successfully saved.";
       return res.redirect('back');
     		})
     .catch(err => {
