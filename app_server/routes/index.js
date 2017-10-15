@@ -36,9 +36,12 @@ router.get('/student', studentController.studentRegisterGet);
 // Posts the form for students data to the DB
 router.post('/student', studentController.studentRegisterPost);
 
+/*
+Project Routes
+*/
 
-//router.get('/project', projectController.projectRegisterGet);
+router.get('/project', projectController.academicPageGet);
 
-//router.post('/project', projectController.projectRegisterPost);
+router.post('/project', projectController.academicPagePost);
 
 module.exports = router;
