@@ -17,7 +17,14 @@ router.get('/', studentController.homePageGet);
 Coordinator Routes
 */
 
-//router.get('/coordinator', coordinatorController.coordinatorGet);
+router.get('/coordinator', coordinatorController.coordinatorLogin);
+
+
+router.post('/coordinatordeleterow', coordinatorController.deleteRow);
+
+router.post('/coordinatorsaverow', coordinatorController.editRow);
+
+router.post('/allocateProjects', coordinatorController.allocateProjects);
 
 /*
 Student Routes
@@ -30,8 +37,8 @@ router.get('/student', studentController.studentRegisterGet);
 router.post('/student', studentController.studentRegisterPost);
 
 
-router.get('/project', projectController.academicPageGet);
+//router.get('/project', projectController.projectRegisterGet);
 
-router.post('/project', projectController.academicPagePost);
+//router.post('/project', projectController.projectRegisterPost);
 
 module.exports = router;
