@@ -1,0 +1,201 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+.blah {
+    
+}
+
+body {
+    margin: 0;
+}
+
+div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+        overflow: scroll;
+}
+
+.mainheader {
+    display: block;
+    top: 0;
+    left: 0;
+    position: relative;
+    overflow: hidden;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
+.mainheader h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 76%;
+    color: white;
+    font-size: 18px;
+    text-align: right;
+    top: 15px;
+    right: 50px;
+    position: absolute;
+}
+
+.header_BG {
+    width: 170%; 
+    //height: 93px;
+    margin-top: -56px;
+    margin-left: -30%;
+}
+
+.UWALogo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 54px;
+}
+
+.logo {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 210px;
+    width/**/: /**/ 200px;
+    height: 76px;
+    height/**/: /**/ 59px;
+    float: left;
+    padding: 11px 0 0 10px;
+}
+
+img#printheader {
+    display: none;
+    width: 2500px;
+    height: 74px;
+}
+
+input.save {
+    display: none;
+}
+
+input.edit {
+    display: inline;
+}
+
+input.delete {
+    display: inline;
+}
+
+.pageTitle {
+    overflow: hidden;
+    background-color: #F2EDD9;
+    border-left: 15px solid #ce7019;
+    margin: 10px;
+    padding-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.pageTitle h1 {
+	font-family: Arial, Helvetica, sans-serif;
+    color: #564C23;
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    padding-top: 6px;
+    padding-bottom: 8px;
+}
+
+.pageTitle h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #0000;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+    padding-top: 8px;
+}
+
+.pageSubTitle {
+    overflow: hidden;
+    background-color: #F2EDD9;
+    margin: 10px;
+    border-left: 15px solid #ce7019;
+    padding-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.pageSubTitle h1 {
+	font-family: Arial, Helvetica, sans-serif;
+    color: #564C23;
+    font-size: 15px;
+    font-weight: 800;
+    margin: 0;
+    padding: 6px 0 8px;
+}
+
+.tab {
+    overflow: hidden;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.tabContent {
+    display: none;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+button {
+    background-color: #F2EDD9;
+    border: 2px solid #564C23;
+    outline: none;
+    position:relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    display:inline-block;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    color: #564C23; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ece4c6;
+    color: #564C23;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table tr:nth-child(even) {
+   background-color: #f5f5f5;
+}
+
+table th{
+    background-color: #d9e6f2;
+    cursor:pointer;
+}
+
+th:hover {
+    background-color: #c3cfd9;
+}
+
