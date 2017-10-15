@@ -56,6 +56,7 @@ html
 					th StudentID
 					th Last Name
 					th First Name
+					th Phone Number
 					th Project Allocation
 					th
 			tfoot
@@ -63,6 +64,7 @@ html
 					th StudentID
 					th Last Name
 					th First Name
+					th Phone Number
 					th Project Allocation
 					th
 			tbody
@@ -71,6 +73,7 @@ html
 						td() #{o.studentID}
 						td() #{o.lastName}
 						td() #{o.firstName}
+						td() #{o.phoneNumber}
 						td() #{o.assignedProject}
 						td
 							img.btnEdit(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
@@ -85,6 +88,7 @@ html
 			action: function ( e, dt, node, config ) {
 			$("#example tbody").append(
 			"<tr>"+
+			"<td><input type='text'/></td>"+
 			"<td><input type='text'/></td>"+
 			"<td><input type='text'/></td>"+
 			"<td><input type='text'/></td>"+
@@ -107,9 +111,11 @@ html
 			var lastName = tdlastName.children().val();
 			var tdfirstName = par.children("td:nth-child(3)");
 			var firstName = tdfirstName.children().val();
-			var tdprojectAllocation = par.children("td:nth-child(4)");
+			var tdphoneNumber = par.children("td:nth-child(4)");
+			var phoneNumber = tdphoneNumber.children().val();
+			var tdprojectAllocation = par.children("td:nth-child(5)");
 			var projectAllocation = tdprojectAllocation.children().val();
-			var tdButtons = par.children("td:nth-child(5)");
+			var tdButtons = par.children("td:nth-child(6)");
 			console.log(studentID);
 			$.ajax({
 				type: 'POST',
@@ -121,6 +127,7 @@ html
 			tdstudentID.html(tdstudentID.children("input[type=text]").val());
 			tdlastName.html(tdlastName.children("input[type=text]").val());
 			tdfirstName.html(tdfirstName.children("input[type=text]").val());
+			tdphoneNumber.html(tdphoneNumber.children("input[type=text]").val());
 			tdprojectAllocation.html(tdprojectAllocation.children("input[type=text]").val());
 			tdButtons.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEdit'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/>");
 			$(".btnEdit").bind("click", Edit);
@@ -132,11 +139,13 @@ html
 			var tdstudentID = par.children("td:nth-child(1)");
 			var tdlastName = par.children("td:nth-child(2)");
 			var tdfirstName = par.children("td:nth-child(3)");
-			var tdprojectAllocation = par.children("td:nth-child(4)");
-			var tdButtons = par.children("td:nth-child(5)");
+			var tdphoneNumber = par.children("td:nth-child(4)");
+			var tdprojectAllocation = par.children("td:nth-child(5)");
+			var tdButtons = par.children("td:nth-child(6)");
 			tdstudentID.html("<input type='text' id='txtstudentID' value='"+tdstudentID.html()+"'/>");
 			tdlastName.html("<input type='text' id='txtlastName' value='"+tdlastName.html()+"'/>");
 			tdfirstName.html("<input type='text' id='txtfirstName' value='"+tdfirstName.html()+"'/>");
+			tdphoneNumber.html("<input type='text' id='txtphoneNumber' value='"+tdphoneNumber.html()+"'/>");
 			tdprojectAllocation.html("<input type='text' id='txtprojectAllocation' value='"+tdprojectAllocation.html()+"'/>");
 			tdButtons.html("<img src='http://gkisschool.com/img/saveHS.png' class='btnSave'/>");
 			$(".btnSave").bind("click", Save);
