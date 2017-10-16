@@ -11,8 +11,6 @@ var projectController = require('../controllers/projectController');
 var studentController = require('../controllers/studentController');
 
 
-router.get('/', studentController.homePageGet);
-
 /*
 Coordinator Routes
 */
