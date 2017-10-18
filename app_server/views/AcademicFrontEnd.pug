@@ -3,81 +3,92 @@ html
     head
       link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
       link(rel='stylesheet', type='text/css', href='AcademicFrontEnd.css')
+      link(rel='stylesheet', type='text/css', href='/stylesheets/coordinatorFrontEnd.css')
+
       style.
         * {
         font-family: 'Ubuntu', sans-serif;
         }
-      img(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', style='width:900px;')
     body
-    h1 Academic Reasearch Project Form
-    form#AcademicForm1(action='', method='POST')
-      #div1(style='background-color:aliceblue')
-        fieldset#field
-          legend#projNum Project
-          p #{error}
-          label Project Title:
-          input#projTitle(type='text', name='projTitle', required)
-          br
-          br
-          label Primary Supervisor: 
-          input#Supervisor1(type='text', name='Supervisor1', required)
-          br
-          br
-          label Supervisor 2: 
-          input#Supervisor2(type='text', name='Supervisor2')
-          br
-          br
-          label Supervisor 3: 
-          input#Supervisor3(type='text', name='Supervisor3')
-          br
-          br
-          label Supervisor 4: 
-          input#Supervisor3(type='text', name='Supervisor4')
-          br
-          br
-          label Supervisor 5: 
-          input#Supervisor3(type='text', name='Supervisor5')
-          br
-          br
-          label Minimum Capacity of Project: 
-          input#capacityProj(size='5', type='number', min='1', name='capacityProjMIN', required)
-          br
-          br
-          label Maximum Capacity of Project: 
-          input#capacityProj(size='5', type='number', name='capacityProjMAX', required)
-          br
-          br
-          label Project brief description: 
-          br
-          input#projDescription(type='text',name='projectDescription', required)
-          br
-          br
-          label Prereuisite skills: 
-          input#priorSkill(size='80', type='text', name='priorSkill')
-          br
-          br
-          label Discipline: 
-          br
-          input#discipline(type='checkbox', name='discipline', value='Electrical')
-          |  Electrical & Electronic
-          input#discipline(type='checkbox', name='discipline', value='Materials')
-          |  Materials
-          input#discipline(type='checkbox', name='discipline', value='Mechanical')
-          |  Mechanical
-          input#discipline(type='checkbox', name='discipline', value='Civil')
-          |  Civil
-          input#discipline(type='checkbox', name='discipline', value='Chemical')
-          |  Chemical 
-          br
-          input#discipline(type='checkbox', name='discipline', value='Software')
-          | Software
-          input#discipline(type='checkbox', name='discipline', value='Environmental')
-          |  Environmental
-          input#discipline(type='checkbox', name='discipline', value='Petroleum')
-          |  Petroleum
-          input#discipline(type='checkbox', name='discipline', value='Oilandgas')
-          |  Oil & Gas
-          input#discipline(type='checkbox', name='discipline', value='Mining')
-          |  Mining
-        input#sub(type='submit', value='Submit')
-        input#subandadd(type='reset', value='Reset')  
+      div
+        .mainheader
+          img.header_BG(src='https://secure.csse.uwa.edu.au/newcss/graphics/header-background-02.jpg', alt='')
+          img.UWALogo(src='https://secure.csse.uwa.edu.au/newcss/graphics/uwacrest.png', alt='UWA LOGO')
+          h1 Faculty of Engineering and Mathematical Sciences
+          .pageTitle
+            h2 BE and MPE Final Year Project
+        .pageSubTitle
+          h1 Academic Research Project Form
+        br
+      form.AcademicForm1(action='', method='POST')
+          fieldset.projectField
+            p.errormsg #{error}
+            label Project Title:
+            input#projTitle(type='text', name='projTitle', required)
+            br
+            br
+            label Primary Supervisor: 
+            input#Supervisor1(type='text', name='Supervisor1', required)
+            br
+            br
+            label Supervisor 2: 
+            input#Supervisor2(type='text', name='Supervisor2')
+            br
+            br
+            label Supervisor 3: 
+            input#Supervisor3(type='text', name='Supervisor3')
+            br
+            br
+            label Supervisor 4: 
+            input#Supervisor3(type='text', name='Supervisor4')
+            br
+            br
+            label Supervisor 5: 
+            input#Supervisor3(type='text', name='Supervisor5')
+            br
+            br
+            label Minimum Capacity of Project: 
+            input#capacityProj(size='5', type='number', min='1', name='capacityProjMIN', required)
+            br
+            br
+            label Maximum Capacity of Project: 
+            input#capacityProj(size='5', type='number', name='capacityProjMAX', required)
+            br
+            br
+            label Project brief description: 
+            br
+            textarea.textareaformat(name='projectDescription', required)
+            br
+            br
+            label Prerequisite skills: 
+            br
+            textarea.textareaformat(name='priorSkill')
+            br
+            br
+            label Discipline: 
+            br
+            input#discipline(type='checkbox', name='discipline', value='Electrical')
+            |  Electrical & Electronic
+            input#discipline(type='checkbox', name='discipline', value='Materials')
+            |  Materials
+            input#discipline(type='checkbox', name='discipline', value='Mechanical')
+            |  Mechanical
+            input#discipline(type='checkbox', name='discipline', value='Civil')
+            |  Civil
+            input#discipline(type='checkbox', name='discipline', value='Chemical')
+            |  Chemical 
+            br
+            input#discipline(type='checkbox', name='discipline', value='Software')
+            | Software
+            input#discipline(type='checkbox', name='discipline', value='Environmental')
+            |  Environmental
+            input#discipline(type='checkbox', name='discipline', value='Petroleum')
+            |  Petroleum
+            input#discipline(type='checkbox', name='discipline', value='Oilandgas')
+            |  Oil & Gas
+            input#discipline(type='checkbox', name='discipline', value='Mining')
+            |  Mining
+            br
+            br
+            input.buttonType(type='submit', value='Submit')
+            input.buttonType(type='reset', value='Reset')  
