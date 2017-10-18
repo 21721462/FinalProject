@@ -16,7 +16,6 @@ html
 		script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js')
 		script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js')
 		script(src='https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js')
-		script(src="/javascripts/script.js")
 
 	body
 		div
@@ -29,10 +28,9 @@ html
 			.pageSubTitle
 				h1 Coordinator Tools
 			.tab
-				button.tabLinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
-				button.tabLinks(onclick="openTab(event, 'ProjectList')") Project List
-				button.tabLinks(onclick="openTab(event, 'Allocations')") Allocations
-
+				button#studentButton.tabLinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
+				button#projectButton.tabLinks(onclick="openTab(event, 'ProjectList')") Project List
+				button#allocateButton.tabLinks(onclick="openTab(event, 'Allocations')") Allocations
 			#StudentPreferences.tabContent
 				-var students = JSON.parse(jsonthing);
 					table#studentTable.newTable.nowrap(cellspacing='0', width='100%')
@@ -41,6 +39,7 @@ html
 								th Student Number
 								th Given Name
 								th Family Name
+								th Phone Number
 								th WAM
 								th Discipline
 								th First Preference
@@ -55,6 +54,7 @@ html
 								th Student Number
 								th Given Name
 								th Family Name
+								th Phone Number
 								th WAM
 								th Discipline
 								th First Preference
@@ -67,20 +67,21 @@ html
 						tbody
 							each o in students
 								tr(id=o._id, for=o._id, name=o.id)
-									td() #{o.studentID}
-									td() #{o.firstName}
-									td() #{o.lastName}
-									td() #{o.wam}
-									td() #{o.discipline}
-									td() #{o.preferences[0]}
-									td() #{o.preferences[1]}
-									td() #{o.preferences[2]}
-									td() #{o.preferences[3]}
-									td() #{o.preferences[4]}
-									td() #{o.preferences[5]}
+									td(value=o.studentID) #{o.studentID}
+									td(value=o.firstName) #{o.firstName}
+									td(value=o.lastName) #{o.lastName}
+									td(value=o.phoneNumber) #{o.phoneNumber}
+									td(value=o.wam) #{o.wam}
+									td(value=o.discipline) #{o.discipline}
+									td(value=o.preferences[0]) #{o.preferences[0]}
+									td(value=o.preferences[1]) #{o.preferences[1]}
+									td(value=o.preferences[2]) #{o.preferences[2]}
+									td(value=o.preferences[3]) #{o.preferences[3]}
+									td(value=o.preferences[4]) #{o.preferences[4]}
+									td(value=o.preferences[5]) #{o.preferences[5]}
 									td
-										img.btnEdit(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
-										img.btnDelete(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
+										img.btnEditStudent(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
+										img.btnDeleteStudent(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
 
 			#ProjectList.tabContent
 				-var projects = JSON.parse(jsonProject);
@@ -91,10 +92,12 @@ html
 							th Supervisor1
 							th Supervisor2
 							th Supervisor3
+							th Supervisor4
+							th Supervisor5
 							th Project Description
 							th Prerequisite Skills
-							th Minimum Capacity
-							th Maximum Capacity
+							th Min Capacity
+							th Max Capacity
 							th Discipline
 							th
 					tfoot
@@ -103,57 +106,61 @@ html
 							th Supervisor1
 							th Supervisor2
 							th Supervisor3
+							th Supervisor4
+							th Supervisor5
 							th Project Description
 							th Prerequisite Skills
-							th Minimum Capacity
-							th Maximum Capacity
+							th Min Capacity
+							th Max Capacity
 							th Discipline
 							th
 					tbody
 						each o in projects
 							tr(id=o._id, for=o._id, name=o.id)
-								td() #{o.title}
-								td() #{o.supervisor}
-								td() #{o.supervisor2}
-								td() #{o.supervisor3}
-								td() #{o.description}
-								td() #{o.prerequisites}
-								td() #{o.capacityMIN}
-								td() #{o.capacityMAX}
-								td() #{o.discipline}
+								td(value=o.title) #{o.title}
+								td(value=o.supervisor) #{o.supervisor}
+								td(value=o.supervisor2) #{o.supervisor2}
+								td(value=o.supervisor3) #{o.supervisor3}
+								td(value=o.supervisor4) #{o.supervisor4}
+								td(value=o.supervisor5) #{o.supervisor5}
+								td(value=o.description) #{o.description}
+								td(value=o.prerequisites) #{o.prerequisites}
+								td(value=o.capacityMIN) #{o.capacityMIN}
+								td(value=o.capacityMAX) #{o.capacityMAX}
+								td(value=o.discipline) #{o.discipline}
 								td
-									img.btnEdit(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
-									img.btnDelete(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
+									img.btnEditProject(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
+									img.btnDeleteProject(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
 
 			#Allocations.tabContent
 				table#allocationTable.display.nowrap(cellspacing='0', width='100%')
 					thead
 						tr
 							th StudentID
-							th Last Name
-							th First Name
+							th Given Name
+							th Family Name
 							th Phone Number
 							th Project Allocation
 							th
 					tfoot
 						tr
 							th StudentID
-							th Last Name
-							th First Name
+							th Given Name
+							th Family Name
 							th Phone Number
 							th Project Allocation
 							th
 					tbody
 						each o in students
 							tr(id=o._id, for=o._id, name=o.id)
-								td() #{o.studentID}
-								td() #{o.lastName}
-								td() #{o.firstName}
-								td() #{o.phoneNumber}
-								td() #{o.assignedProject}
+								td(value=o.studentID) #{o.studentID}
+								td(value=o.firstName) #{o.firstName}
+								td(value=o.lastName) #{o.lastName}
+								td(value=o.phoneNumber) #{o.phoneNumber}
+								td(value=o.assignedProject) #{o.assignedProject}
 								td
-									img.btnEdit(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
-									img.btnDelete(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
+									img.btnEditAllocate(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
+									img.btnDeleteAllocate(src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png')
 			script.
 				var t = $('#allocationTable').DataTable( {
 				dom: 'Bfrtip',
@@ -170,22 +177,28 @@ html
 				"<td><input type='text'/></td>"+
 				"<td><input type='text'/></td>"+
 				"<td><input type='text'/></td>"+
-				"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSave'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/></td>"+
+				"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSaveAllocate'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDeleteAllocate'/></td>"+
 				"</tr>");
-				$(".btnSave").bind("click", Save);
-				$(".btnDelete").bind("click", Delete);
+				$(".btnSaveAllocate").bind("click", SaveAllocate);
+				$(".btnDeleteAllocate").bind("click", DeleteAllocate);
 				}
 				}, {
 				text: 'Allocate',
 				action: function (e, dt, node, config) {
 				$.ajax({
 					type: 'POST',
-					url: 'http://localhost:3000/allocateProjects'
-				})
+					url: '/allocateProjects'
+				});
+				localStorage.setItem("ActiveTabID" , "Allocations");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
 				}
 				}
-				], select: true,
-				} );
+				]
+				});
 			script.
 				var t = $('#studentTable').DataTable( {
 				dom: 'Bfrtip',
@@ -208,13 +221,15 @@ html
 				"<td><input type='text'/></td>"+
 				"<td><input type='text'/></td>"+
 				"<td><input type='text'/></td>"+
-				"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSave'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/></td>"+
+				"<td><input type='text'/></td>"+
+				"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSaveStudent'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDeleteStudent'/></td>"+
 				"</tr>");
-				$(".btnSave").bind("click", Save);
-				$(".btnDelete").bind("click", Delete);
+				$(".btnEditStudent").bind("click", EditStudent);
+				$(".btnSaveStudent").bind("click", SaveStudent);
+				$(".btnDeleteStudent").bind("click", DeleteStudent);
 				}
 				}
-				], select: true,
+				]
 				} );
 			script.
 				var t = $('#projectTable').DataTable( {
@@ -235,79 +250,352 @@ html
 				"<td><input type='text'/></td>"+
 				"<td><input type='text'/></td>"+
 				"<td><input type='text'/></td>"+
-				"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSave'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/></td>"+
+				"<td><input type='text'/></td>"+
+				"<td><input type='text'/></td>"+
+				"<td><img src='http://gkisschool.com/img/saveHS.png' class='btnSaveProject'><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDeleteProject'/></td>"+
 				"</tr>");
-				$(".btnSave").bind("click", Save);
-				$(".btnDelete").bind("click", Delete);
+				$(".btnEditProject").bind("click",EditProject);
+				$(".btnSaveProject").bind("click", SaveProject);
+				$(".btnDeleteProject").bind("click", DeleteProject);
 				}
 				}
-				], select: true,
+				]
 				} );
+
 			script.
-				function Save(){
+				function SaveProject(){
+				var par = $(this).parent().parent(); //tr
+				var row = $(this).parent().parent().attr('id');
+				var tdprojectTitle = par.children("td:nth-child(1)");
+				var projectTitle = tdprojectTitle.children().val();
+				var tdsupervisor1 = par.children("td:nth-child(2)");
+				var supervisor1 = tdsupervisor1.children().val();
+				var tdsupervisor2 = par.children("td:nth-child(3)");
+				var supervisor2 = tdsupervisor2.children().val();
+				var tdsupervisor3 = par.children("td:nth-child(4)");
+				var supervisor3 = tdsupervisor3.children().val();
+				var tdsupervisor4 = par.children("td:nth-child(5)");
+				var supervisor4 = tdsupervisor4.children().val();
+				var tdsupervisor5 = par.children("td:nth-child(6)");
+				var supervisor5 = tdsupervisor5.children().val();
+				var tdprojDesc = par.children("td:nth-child(7)");
+				var projDesc = tdprojDesc.children().val();
+				var tdprereqSkills = par.children("td:nth-child(8)");
+				var prereqSkills = tdprereqSkills.children().val();
+				var tdminCap = par.children("td:nth-child(9)");
+				var minCap = tdminCap.children().val();
+				var tdmaxCap = par.children("td:nth-child(10)");
+				var maxCap = tdmaxCap.children().val();
+				var tddiscipline = par.children("td:nth-child(11)");
+				var discipline = tddiscipline.children().val();
+				var tdButtonsProject = par.children("td:nth-child(12)");
+				var timeSubmitted = new Date().toLocaleString().toString();
+
+				$.ajax({
+					type: 'POST',
+					url: '/coordinatorsaverowproject',
+					//- data: [{rowID: row}, {ID: tdstudentID}, {lName: tdlastName}, {fName: tdfirstName}, {projAlloc: tdprojectAllocation}]
+					data: {rowID: row, titleIn: projectTitle, supervisor1In: supervisor1, supervisor2In: supervisor2, supervisor3In: supervisor3, supervisor4In: supervisor4, supervisor5In: supervisor5, descriptionIn: projDesc, prerequisitesIn: prereqSkills, capacityMINIn: minCap, capacityMAXIn: maxCap, disciplineIn: discipline, timeSubmittedIn: timeSubmitted}
+				});
+
+				tdprojectTitle.html(tdprojectTitle.children("input[type=text]").val());
+				tdsupervisor1.html(tdsupervisor1.children("input[type=text]").val());
+				tdsupervisor2.html(tdsupervisor2.children("input[type=text]").val());
+				tdsupervisor3.html(tdsupervisor3.children("input[type=text]").val());
+				tdsupervisor4.html(tdsupervisor4.children("input[type=text]").val());
+				tdsupervisor5.html(tdsupervisor5.children("input[type=text]").val());
+				tdprojDesc.html(tdprojDesc.children("input[type=text]").val());
+				tdprereqSkills.html(tdprereqSkills.children("input[type=text]").val());
+				tdminCap.html(tdminCap.children("input[type=text]").val());
+				tdmaxCap.html(tdmaxCap.children("input[type=text]").val());
+				tddiscipline.html(tddiscipline.children("input[type=text]").val());
+				tdButtonsProject.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEditProject'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDeleteProject'/>");
+				$(".btnEditProject").bind("click", EditProject);
+				$(".btnDeleteProject").bind("click", DeleteProject); 
+				localStorage.setItem("ActiveTabID" , "ProjectList");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
+				};
+
+			script.
+				function EditProject(){
+				var par = $(this).parent().parent(); //tr
+				var tdprojectTitle = par.children("td:nth-child(1)");
+				var tdsupervisor1 = par.children("td:nth-child(2)");
+				var tdsupervisor2 = par.children("td:nth-child(3)");
+				var tdsupervisor3 = par.children("td:nth-child(4)");
+				var tdsupervisor4 = par.children("td:nth-child(5)");
+				var tdsupervisor5 = par.children("td:nth-child(6)");
+				var tdprojDesc = par.children("td:nth-child(7)");
+				var tdprereqSkills = par.children("td:nth-child(8)");
+				var tdminCap = par.children("td:nth-child(9)");
+				var tdmaxCap = par.children("td:nth-child(10)");
+				var tddiscipline = par.children("td:nth-child(11)");
+				var tdButtonsProject = par.children("td:nth-child(12)");
+				tdprojectTitle.html("<input type='text' id='txtprojectTitle' value='"+tdprojectTitle.html()+"'/>");
+				tdsupervisor1.html("<input type='text' id='txtsupervisor1' value='"+tdsupervisor1.html()+"'/>");
+				tdsupervisor2.html("<input type='text' id='txtsupervisor2' value='"+tdsupervisor2.html()+"'/>");
+				tdsupervisor3.html("<input type='text' id='txtsupervisor3' value='"+tdsupervisor3.html()+"'/>");
+				tdsupervisor4.html("<input type='text' id='txtsupervisor4' value='"+tdsupervisor4.html()+"'/>");
+				tdsupervisor5.html("<input type='text' id='txtsupervisor5' value='"+tdsupervisor5.html()+"'/>");
+				tdprojDesc.html("<input type='text' id='txtprojDesc' value='"+tdprojDesc.html()+"'/>");
+				tdprereqSkills.html("<input type='text' id='txtprereqSkills' value='"+tdprereqSkills.html()+"'/>");
+				tdminCap.html("<input type='text' id='txtminCap' value='"+tdminCap.html()+"'/>");
+				tdmaxCap.html("<input type='text' id='txtmaxCap' value='"+tdmaxCap.html()+"'/>");
+				tddiscipline.html("<input type='text' id='txtdiscipline' value='"+tddiscipline.html()+"'/>");
+				tdButtonsProject.html("<img src='http://gkisschool.com/img/saveHS.png' class='btnSaveProject'/>");
+				$(".btnSaveProject").bind("click", SaveProject);
+				$(".btnEditProject").bind("click", EditProject);
+				$(".btnDeleteProject").bind("click", DeleteProject);
+				};
+
+			script.
+				function SaveStudent(){
 				var par = $(this).parent().parent(); //tr
 				var row = $(this).parent().parent().attr('id');
 				var tdstudentID = par.children("td:nth-child(1)");
 				var studentID = tdstudentID.children().val();
-				var tdlastName = par.children("td:nth-child(2)");
-				var lastName = tdlastName.children().val();
-				var tdfirstName = par.children("td:nth-child(3)");
+				var tdgivenName = par.children("td:nth-child(2)");
+				var givenName = tdgivenName.children().val();
+				var tdfamilyName = par.children("td:nth-child(3)");
+				var familyName = tdfamilyName.children().val();
+				var tdphoneNumber = par.children("td:nth-child(4)");
+				var phoneNumber = tdphoneNumber.children().val();
+				var tdwam = par.children("td:nth-child(5)");
+				var wam = tdwam.children().val();
+				var tddiscipline = par.children("td:nth-child(6)");
+				var discipline = tddiscipline.children().val();
+				var tdfirstPref = par.children("td:nth-child(7)");
+				var firstPref = tdfirstPref.children().val();
+				var tdsecondPref = par.children("td:nth-child(8)");
+				var secondPref = tdsecondPref.children().val();
+				var tdthirdPref = par.children("td:nth-child(9)");
+				var thirdPref = tdthirdPref.children().val();
+				var tdforthPref = par.children("td:nth-child(10)");
+				var forthPref = tdforthPref.children().val();
+				var tdfifthPref = par.children("td:nth-child(11)");
+				var fifthPref = tdfifthPref.children().val();
+				var tdsixthPref = par.children("td:nth-child(12)");
+				var sixthPref = tdsixthPref.children().val();
+				var tdButtonsStudent = par.children("td:nth-child(13)");
+
+				$.ajax({
+					type: 'POST',
+					url: '/coordinatorsaverowstudent',
+					//- data: [{rowID: row}, {ID: tdstudentID}, {lName: tdlastName}, {fName: tdfirstName}, {projAlloc: tdprojectAllocation}]
+					data: {rowID: row, ID: studentID, fName: givenName, lName: familyName, pNumber: phoneNumber, wamInput: wam, disc: discipline, pref1: firstPref, pref2: secondPref, pref3: thirdPref, pref4: forthPref, pref5: fifthPref, pref6: sixthPref }
+				});
+
+				tdstudentID.html(tdstudentID.children("input[type=text]").val());
+				tdgivenName.html(tdgivenName.children("input[type=text]").val());
+				tdfamilyName.html(tdfamilyName.children("input[type=text]").val());
+				tdphoneNumber.html(tdphoneNumber.children("input[type=text]").val());
+				tdwam.html(tdwam.children("input[type=text]").val());
+				tddiscipline.html(tddiscipline.children("input[type=text]").val());
+				tdfirstPref.html(tdfirstPref.children("input[type=text]").val());
+				tdsecondPref.html(tdsecondPref.children("input[type=text]").val());
+				tdthirdPref.html(tdthirdPref.children("input[type=text]").val());
+				tdforthPref.html(tdforthPref.children("input[type=text]").val());
+				tdfifthPref.html(tdfifthPref.children("input[type=text]").val());
+				tdsixthPref.html(tdsixthPref.children("input[type=text]").val());
+				tdButtonsStudent.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEditStudent'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDeleteStudent'/>");
+				$(".btnEditStudent").bind("click", EditStudent);
+				$(".btnDeleteStudent").bind("click", DeleteStudent);
+				localStorage.setItem("ActiveTabID" , "StudentPreferences");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
+				};
+
+			script.
+				function EditStudent(){
+				var par = $(this).parent().parent(); //tr
+				var tdstudentID = par.children("td:nth-child(1)");
+				var tdgivenName = par.children("td:nth-child(2)");
+				var tdfamilyName = par.children("td:nth-child(3)");
+				var tdphoneNumber = par.children("td:nth-child(4)");
+				var tdwam = par.children("td:nth-child(5)");
+				var tddiscipline = par.children("td:nth-child(6)");
+				var tdfirstPref = par.children("td:nth-child(7)");
+				var tdsecondPref = par.children("td:nth-child(8)");
+				var tdthirdPref = par.children("td:nth-child(9)");
+				var tdforthPref = par.children("td:nth-child(10)");
+				var tdfifthPref = par.children("td:nth-child(11)");
+				var tdsixthPref = par.children("td:nth-child(12)");
+				var tdButtonsStudent = par.children("td:nth-child(13)");
+				tdstudentID.html("<input type='text' id='txtstudentID' value='"+tdstudentID.html()+"'/>");
+				tdgivenName.html("<input type='text' id='txtgivenName' value='"+tdgivenName.html()+"'/>");
+				tdfamilyName.html("<input type='text' id='txtfamilyName' value='"+tdfamilyName.html()+"'/>");
+				tdphoneNumber.html("<input type='text' id='txtfamilyName' value='"+tdphoneNumber.html()+"'/>");
+				tdwam.html("<input type='text' id='txtwam' value='"+tdwam.html()+"'/>");
+				tddiscipline.html("<input type='text' id='txtdiscipline' value='"+tddiscipline.html()+"'/>");
+				tdfirstPref.html("<input type='text' id='txtfirstPref' value='"+tdfirstPref.html()+"'/>");
+				tdsecondPref.html("<input type='text' id='txtsecondPref' value='"+tdsecondPref.html()+"'/>");
+				tdthirdPref.html("<input type='text' id='txtthirdPref' value='"+tdthirdPref.html()+"'/>");
+				tdforthPref.html("<input type='text' id='txtforthPref' value='"+tdforthPref.html()+"'/>");
+				tdfifthPref.html("<input type='text' id='txtfifthPref' value='"+tdfifthPref.html()+"'/>");
+				tdsixthPref.html("<input type='text' id='txtsixthPref' value='"+tdsixthPref.html()+"'/>");
+				tdButtonsStudent.html("<img src='http://gkisschool.com/img/saveHS.png' class='btnSaveStudent'/>");
+				$(".btnSaveStudent").bind("click", SaveStudent);
+				$(".btnEditStudent").bind("click", EditStudent);
+				$(".btnDeleteStudent").bind("click", DeleteStudent); };
+
+			script.
+				function SaveAllocate(){
+				var par = $(this).parent().parent(); //tr
+				var row = $(this).parent().parent().attr('id');
+				var tdstudentID = par.children("td:nth-child(1)");
+				var studentID = tdstudentID.children().val();
+				var tdfirstName = par.children("td:nth-child(2)");
 				var firstName = tdfirstName.children().val();
+				var tdlastName = par.children("td:nth-child(3)");
+				var lastName = tdlastName.children().val();
 				var tdphoneNumber = par.children("td:nth-child(4)");
 				var phoneNumber = tdphoneNumber.children().val();
 				var tdprojectAllocation = par.children("td:nth-child(5)");
 				var projectAllocation = tdprojectAllocation.children().val();
-				var tdButtons = par.children("td:nth-child(6)");
-				console.log(studentID);
+				var oldProj = tdprojectAllocation.attr("value");
+				var tdButtonsAllocate = par.children("td:nth-child(6)");
 				$.ajax({
 					type: 'POST',
-					url: 'http://localhost:3000/coordinatorsaverow',
+					url: '/coordinatorsaverowstudent',
 					//- data: [{rowID: row}, {ID: tdstudentID}, {lName: tdlastName}, {fName: tdfirstName}, {projAlloc: tdprojectAllocation}]
-					data: {rowID: row, ID: studentID, lName: lastName, fName: firstName, projAlloc: projectAllocation}
+					data: {rowID: row, ID: studentID, lName: lastName, fName: firstName, pNumber: phoneNumber, projAlloc: projectAllocation, oldProject: oldProj}
 				});
 				tdstudentID.html(tdstudentID.children("input[type=text]").val());
 				tdlastName.html(tdlastName.children("input[type=text]").val());
 				tdfirstName.html(tdfirstName.children("input[type=text]").val());
 				tdphoneNumber.html(tdphoneNumber.children("input[type=text]").val());
 				tdprojectAllocation.html(tdprojectAllocation.children("input[type=text]").val());
-				tdButtons.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEdit'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDelete'/>");
-				$(".btnEdit").bind("click", Edit);
-				$(".btnDelete").bind("click", Delete); };
+				tdButtonsAllocate.html("<img src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png' class='btnEditAllocate'/><img src='http://www.goldstockdata.com/images/site/icon_autosuggest_delete.png' class='btnDeleteAllocate'/>");
+				$(".btnEditAllocate").bind("click", EditAllocate);
+				$(".btnDeleteAllocate").bind("click", DeleteAllocate); 
+				localStorage.setItem("ActiveTabID" , "Allocations");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
+				};
+
 
 			script.
-				function Edit(){
+				function EditAllocate(){
 				var par = $(this).parent().parent(); //tr
 				var tdstudentID = par.children("td:nth-child(1)");
 				var tdlastName = par.children("td:nth-child(2)");
 				var tdfirstName = par.children("td:nth-child(3)");
 				var tdphoneNumber = par.children("td:nth-child(4)");
 				var tdprojectAllocation = par.children("td:nth-child(5)");
-				var tdButtons = par.children("td:nth-child(6)");
+				var tdButtonsAllocate = par.children("td:nth-child(6)");
 				tdstudentID.html("<input type='text' id='txtstudentID' value='"+tdstudentID.html()+"'/>");
 				tdlastName.html("<input type='text' id='txtlastName' value='"+tdlastName.html()+"'/>");
 				tdfirstName.html("<input type='text' id='txtfirstName' value='"+tdfirstName.html()+"'/>");
 				tdphoneNumber.html("<input type='text' id='txtphoneNumber' value='"+tdphoneNumber.html()+"'/>");
 				tdprojectAllocation.html("<input type='text' id='txtprojectAllocation' value='"+tdprojectAllocation.html()+"'/>");
-				tdButtons.html("<img src='http://gkisschool.com/img/saveHS.png' class='btnSave'/>");
-				$(".btnSave").bind("click", Save);
-				$(".btnEdit").bind("click", Edit);
-				$(".btnDelete").bind("click", Delete); };
+				tdButtonsAllocate.html("<img src='http://gkisschool.com/img/saveHS.png' class='btnSaveAllocate'/>");
+				$(".btnSaveAllocate").bind("click", SaveAllocate);
+				$(".btnEditAllocate").bind("click", EditAllocate);
+				$(".btnDeleteAllocate").bind("click", DeleteAllocate); };
+
 			script.
-				function Delete(){
+				function DeleteStudent(){
+				var par = $(this).parent().parent(); //tr
+				var rowId = $(this).parent().parent().attr('id');
+				var tdprojectAllocation = par.children("td:nth-child(5)");
+				var oldProjectAllocation = tdprojectAllocation.attr("value");
+				$.ajax({
+					type: 'POST',
+					url: '/coordinatordeleterowstudent',
+					data: {rowID: rowId, oldProject: oldProjectAllocation}
+				});
+				par.remove(); 
+				localStorage.setItem("ActiveTabID" , "StudentPreferences");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
+				};
+
+			script.
+				function DeleteAllocate(){
+				var par = $(this).parent().parent(); //tr
+				var rowId = $(this).parent().parent().attr('id');
+				var tdprojectAllocation = par.children("td:nth-child(5)");
+				var oldProjectAllocation = tdprojectAllocation.attr("value");				
+				$.ajax({
+					type: 'POST',
+					url: '/coordinatordeleterowstudent',
+					data: {rowID: rowId, oldProject: oldProjectAllocation}
+				});
+				par.remove(); 
+				localStorage.setItem("ActiveTabID" , "Allocations");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
+				};
+
+			script.
+				function DeleteProject(){
 				var par = $(this).parent().parent(); //tr
 				var rowId = $(this).parent().parent().attr('id');
 				
 				$.ajax({
 					type: 'POST',
-					url: 'http://localhost:3000/coordinatordeleterow',
+					url: '/coordinatordeleterowproject',
 					data: {rowID: rowId}
-				})
+				});
+				par.remove();
+				localStorage.setItem("ActiveTabID" , "ProjectList");
+				$.ajax({
+					type: 'GET',
+					url: '/coordinator'
+				});
+				window.location.reload(true);
 
+				};
 
-				console.log(rowId);
-
-				par.remove(); };
 			script.
 				$(function(){ //Add, Save, Edit and Delete functions code
-				$(".btnEdit").bind("click", Edit);
-				$(".btnDelete").bind("click", Delete); });
+				$(".btnEditAllocate").bind("click", EditAllocate);
+				$(".btnEditStudent").bind("click", EditStudent);
+				$(".btnEditProject").bind("click", EditProject);
+				$(".btnDeleteProject").bind("click", DeleteProject);
+				$(".btnDeleteStudent").bind("click", DeleteStudent); 
+				$(".btnDeleteAllocate").bind("click", DeleteAllocate); 
+				});
+
+			script.
+					$(window).load(function() {
+					var activeTab = localStorage.getItem("ActiveTabID");
+					if(activeTab=="StudentPreferences"){
+						$('#StudentPreferences').show();
+						$('#studentButton').addClass('selected');
+						}
+					else if(activeTab=="ProjectList"){
+						$('#ProjectList').show();
+						$('#projectButton').addClass('selected');
+						}
+					else if(activeTab=="Allocations"){
+						$('#Allocations').show();
+						$('#allocateButton').addClass('selected');
+						}
+					else {
+						$('#Allocations').hide();
+						$('#ProjectList').hide();
+						$('#StudentPreferences').hide();
+					}
+					});
+			script.
+				$('button').on('click', function(){
+					$('button').removeClass('selected');
+					$(this).addClass('selected');
+				});
