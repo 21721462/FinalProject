@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
-var passportLocal = require('passport-local-mongoose');
 
 var Schema = mongoose.Schema;
 
 var coordinatorSchema = Schema ({
-	email: {type: String, unique: true, required: true}
-})
+	cutDate:{type: String, unique: false, required: true},
+	password :{type: String, unique: false, required: true}
+});
 
-
-coordinatorSchema.plugin(passportLocal);
+module.exports = mongoose.model('Coordinator', coordinatorSchema);
