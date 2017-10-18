@@ -1,12 +1,14 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
 
-.blah {
-    
-}
-
 body {
     margin: 0;
 }
+
+
+#Tabs .tabLinks li.selected a {
+background-color: aqua;
+}
+
 
 div.dataTables_wrapper {
         width: 100%;
@@ -170,6 +172,11 @@ button {
 
 button:hover {
     background-color: #ece4c6;
+    color: #564C23;
+}
+
+button.selected {
+    background-color: #eadead;
     color: #564C23;
 }
 
