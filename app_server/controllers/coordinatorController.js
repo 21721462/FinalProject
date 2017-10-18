@@ -7,41 +7,86 @@ var validator = require('validator');
 var Grid = require('editable-grid')
 $ = require('jquery');
 
-// Display the cooridnator main page
+
+var cuttoffDateTEMP;
+var passthroughDate;
+var CoordinatorPass;
+
+Coordinator.find({}, function(err, data)
+{
+	var cuttoffDateTEMP1 = new Date(parseInt(data[0].cutDate, 10));
+	console.log(cuttoffDateTEMP1);
+	cuttoffDateTEMP = cuttoffDateTEMP1.toString();
+	passthroughDate = data[0].cutDate;
+	CoordinatorPass = data[0].password;
+});
+
+// Display the coordinator main page
 exports.coordinatorLogin = function(req, res, next) {
 	Student.find().exec(function(err, studentList){
 		Project.find().exec(function(err, projectList) {
-			res.render('coordinatorFrontEnd',{title: "Coordinator Front End", jsonthing: JSON.stringify(studentList), jsonProject: JSON.stringify(projectList)});
+			res.render('CoordinatorFrontEnd',{title: "Coordinator Front End", jsonthing: JSON.stringify(studentList), jsonProject: JSON.stringify(projectList), cuttoffDate : cuttoffDateTEMP.toLocaleString()});
 		});
 	});
 }
 
-
-
-exports.removeStudent = function (req, res) 
-{
-	
-}
-
-exports.createGrid = function(req, res, next){
-	
+exports.coordinatorLoginGet = function(req, res, next) {
+	res.render('CoordinatorLogin', {title: "Coordinator Login", error : ""});
 }
 
 
 
-exports.editStudent = function (req, res)
+exports.cooridnatorLoginPost = function(req, res, next)
 {
-
+	if (CoordinatorPass == req.body.password)
+	{
+		res.redirect('/coordinator');
+	}
+	else
+	{
+		res.render('CoordinatorLogin', {title: "Coordinator Login", error : "Incorrect Password"});
+	}
 }
 
-exports.sendEmailALL = function (req, res)
+exports.setdueDate = function(req, res, next)
 {
+	if (req.body.passupdate == undefined && req.body.cuttoff != undefined)
+	{
+		var fullDate = req.body.cuttoff;
+		var milliDate = Date.parse(fullDate);
+		var cuttoffDateTEMP1 = new Date(parseInt(milliDate, 10));
+		cuttoffDateTEMP = cuttoffDateTEMP1.toString();
+		console.log("HERE2");
+		var dateStore = {
+			cutDate : milliDate,
+			password: CoordinatorPass
+		}
+		passthroughDate = milliDate;
+	}
+	else if(req.body.passupdate != undefined && req.body.cuttoff == undefined)
+	{
+		console.log("HERE3");
+		console.log(passthroughDate);
+		console.log(req.body.passupdate);
+		var dateStore = {
+			cutDate : passthroughDate,
+			password: req.body.passupdate
+		}
+		CoordinatorPass = req.body.passupdate;
+	}
+	var myDate = new Coordinator(dateStore);
+	var upData = myDate.toObject();
 
-}
+	delete upData._id;
 
-exports.sendEmailIndividual = function (req, res)
-{
-
+	Coordinator.findOneAndUpdate({}, upData, {upsert: true}, function(err, doc)
+	{
+		if (err)
+		{
+			console.log("could not update data");
+		}
+		return res.redirect('back');
+	});
 }
 
 exports.allocateProjects = function (req, res) {
