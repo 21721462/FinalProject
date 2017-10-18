@@ -17,10 +17,13 @@ Coordinator Routes
 
 router.get('/coordinator', coordinatorController.coordinatorLogin);
 
+router.post('/coordinatordeleterowstudent', coordinatorController.deleteRowStudent);
 
-router.post('/coordinatordeleterow', coordinatorController.deleteRow);
+router.post('/coordinatordeleterowproject', coordinatorController.deleteRowProject);
 
-router.post('/coordinatorsaverow', coordinatorController.editRow);
+router.post('/coordinatorsaverowstudent', coordinatorController.editRowStudent);
+
+router.post('/coordinatorsaverowproject', coordinatorController.editRowProject);
 
 router.post('/allocateProjects', coordinatorController.allocateProjects);
 
@@ -34,12 +37,8 @@ router.get('/student', studentController.studentRegisterGet);
 // Posts the form for students data to the DB
 router.post('/student', studentController.studentRegisterPost);
 
-/*
-Project Routes
-*/
 
 router.get('/project', projectController.academicPageGet);
-
 router.post('/project', projectController.academicPagePost);
 
 module.exports = router;
