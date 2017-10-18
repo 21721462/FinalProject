@@ -15,6 +15,10 @@ var studentController = require('../controllers/studentController');
 Coordinator Routes
 */
 
+router.get('/CoordinatorLogin', coordinatorController.coordinatorLoginGet);
+
+router.post('/CoordinatorLogin', coordinatorController.cooridnatorLoginPost);
+
 router.get('/coordinator', coordinatorController.coordinatorLogin);
 
 router.post('/coordinatordeleterowstudent', coordinatorController.deleteRowStudent);
