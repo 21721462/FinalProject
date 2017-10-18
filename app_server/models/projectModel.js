@@ -6,6 +6,8 @@ var projectSchema = Schema({
 	supervisor: {type: String, unique: false, required:true},
 	supervisor2: {type: String, unique: false, required:false},
 	supervisor3: {type: String, unique: false, required:false},
+	supervisor4: {type: String, unique: false, required:false},
+	supervisor5: {type: String, unique: false, required:false},
 	capacityMIN: {type: Number, unique: false, required:true},
 	capacityMAX: {type: Number, unique: false, required:true},
 	description: {type: String, unique: false, required: true},
