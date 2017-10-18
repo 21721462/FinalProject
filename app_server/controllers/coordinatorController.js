@@ -21,6 +21,11 @@ Coordinator.find({}, function(err, data)
 	CoordinatorPass = data[0].password;
 });
 
+exports.uploadcsv = function(req, res, next)
+{
+	return res.redirect('back');
+}
+
 // Display the coordinator main page
 exports.coordinatorLogin = function(req, res, next) {
 	Student.find().exec(function(err, studentList){
