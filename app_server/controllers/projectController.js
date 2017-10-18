@@ -48,8 +48,6 @@ exports.academicPagePost = function(req, res, next)
 
 	var time = new Date().toLocaleString().toString();
 
-	console.log(time);
-
 	var ProjectUpload = {
 		title : ProjectTitle,
 		supervisor : superVisor,
