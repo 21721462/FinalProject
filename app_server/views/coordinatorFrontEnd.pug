@@ -28,9 +28,20 @@ html
 			.pageSubTitle
 				h1 Coordinator Tools
 			.tab
-				button#studentButton.tabLinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
-				button#projectButton.tabLinks(onclick="openTab(event, 'ProjectList')") Project List
-				button#allocateButton.tabLinks(onclick="openTab(event, 'Allocations')") Allocations
+			form(action='', method='POST')
+          		 p The current due date is #{cuttoffDate}
+         		 label Set preference submission due date 
+          		 input(type='date', name = 'cuttoff', required) 
+         		 input.buttonType(type='submit', value='Submit') 
+        
+        		form(action='', method='POST') 
+         		 label Update Password 
+          		 input(type='text', name = 'passupdate', required) 
+         		 input.buttonType(type='submit', value='Submit')	
+			 
+			button#studentButton.tabLinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
+			button#projectButton.tabLinks(onclick="openTab(event, 'ProjectList')") Project List
+			button#allocateButton.tabLinks(onclick="openTab(event, 'Allocations')") Allocations
 			#StudentPreferences.tabContent
 				-var students = JSON.parse(jsonthing);
 					table#studentTable.newTable.nowrap(cellspacing='0', width='100%')
