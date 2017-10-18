@@ -2,15 +2,20 @@ html
     head
         title Student Projects Allocation Form
         link(rel='stylesheet', href='/stylesheets/genCSS.css')
-        link(rel='stylesheet', href='/stylesheets/studentFrontEnd.css')
+        link(rel='stylesheet', type='text/css', href='/stylesheets/coordinatorFrontEnd.css')
         link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
         script(src='studentFrontEnd.js')
         
     body
-        #title
-        img#UWALogo(src='https://static.wixstatic.com/media/2144d8_0bc4425578514f20bf9ffe589635b284~mv2.png', alt='UWA LOGO', style='width:900px;')
-        h1 Student Projects Preferences Form
+        .mainheader
+            img.header_BG(src='https://secure.csse.uwa.edu.au/newcss/graphics/header-background-02.jpg', alt='')
+            img.UWALogo(src='https://secure.csse.uwa.edu.au/newcss/graphics/uwacrest.png', alt='UWA LOGO')
+            h1 Faculty of Engineering and Mathematical Sciences
+            .pageTitle
+                h2 BE and MPE Final Year Project
+        .pageSubTitle
+                h1 Student Registration form 
         form(action='', method='POST')
             fieldset
                 p#errorprint #{err}
@@ -33,15 +38,15 @@ html
                 br
                 label Discipline: 
                 br
-                input#discipline(type='radio', name='discipline', value='electrical', required)
+                input#discipline(type='radio', name='discipline', value='Electrical', required)
                 |  Electrical 
-                input#discipline(type='radio', name='discipline', value='mechanical', required)
+                input#discipline(type='radio', name='discipline', value='Mechanical', required)
                 |  Mechanical 
-                input#discipline(type='radio', name='discipline', value='chemical', required)
+                input#discipline(type='radio', name='discipline', value='Chemical', required)
                 |  Chemical 
-                input#discipline(type='radio', name='discipline', value='software', required)
+                input#discipline(type='radio', name='discipline', value='Software', required)
                 | Software 
-                input#discipline(type='radio', name='discipline', value='civil', required)
+                input#discipline(type='radio', name='discipline', value='Civil', required)
                 | Civil 
                 input#discipline(type='radio', name='discipline', value='Environmental', required)
                 |  Environmental 
@@ -90,5 +95,5 @@ html
                     option(value='None') Pick Your Preference
                      each o in projects
                         option(value=o.title) #{o.discipline} #{o.title}
-            input#submit(type='submit', value='Submit')
-            input#reset(type='reset', value='Reset')
+            input.buttonType(type='submit', value='Submit')
+            input.buttonType(type='reset', value='Reset')
