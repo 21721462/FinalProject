@@ -81,34 +81,133 @@ exports.allocateProjects = function (req, res) {
 	}); //Student find
 }
 
-exports.deleteRow = function(req, res){
-	console.log("removed row");
-	var row = req.body.rowID;
-	Student.find({'_id': row}).exec(function(err, doc){
-				console.log(JSON.stringify(doc));
-				//doc.remove();
-			});
-	Student.find({'_id': row}).remove().exec();
+exports.deleteRowProject = function(req, res){
+	Project.find({'_id': req.body.rowID}).remove().exec();
+}
+
+exports.deleteRowStudent = function(req, res){
+
+	Project.findOne({"title": req.body.oldProject}, function(err, project){
+			if(project) {
+				project.numAllocated--;
+				project.save(function(err){
+					if(err){
+						console.log(err);
+					}
+					else console.log("Successful reduction");
+					});
+				}
+		});
+	Student.find({'_id': req.body.rowID}).remove().exec();
 	
 }
 
-
-exports.editRow = function(req, res){
+exports.editRowProject = function(req, res){
 	var row = req.body.rowID;
-	//Student.find({'_id': row}).remove().exec();
-	console.log("old removed");
-	Student.findOne({'_id': row}, function(err, student){
-		student.firstName = req.body.fName;
-		student.lastName = req.body.lName;
-		student.studentID = req.body.ID;
-		student.assignedProject = req.body.projAlloc;
-		console.log(student);
-		student.save(function(err){
+	Project.findOne({'_id': row}, function(err, project){
+		if(!project){
+			project = new Project();
+			project.title = "untitled";
+			project.supervisor = "None"; 
+			project.supervisor2 = "None"; 
+			project.supervisor3 = "None";
+			project.supervisor4 = "None";
+			project.supervisor5 = "None"; 
+			project.capacityMIN = 0;
+			project.capacityMAX = 10;
+			project.description = "None"
+			project.prerequisites = "None"
+			project.discipline = ["None"]; //[{type: String, unique: false, required: false}],
+			project.timeStamp = new Date().toLocaleString().toString();
+			project.numAllocated = 0;
+		}
+		if(req.body.titleIn) {project.title = req.body.titleIn;}
+		if(req.body.supervisor1In) {project.supervisor = req.body.supervisor1In;}
+		if(req.body.supervisor2In) {project.supervisor2 = req.body.supervisor2In;}
+		if(req.body.supervisor3In) {project.supervisor3 = req.body.supervisor3In;}
+		if(req.body.supervisor4In) {project.supervisor4 = req.body.supervisor4In;}
+		if(req.body.supervisor5In) {project.supervisor5 = req.body.supervisor5In;}
+		if(req.body.capacityMINIn) {project.capacityMIN = req.body.capacityMINIn;}
+		if(req.body.capacityMAXIn) {project.capacityMAX = req.body.capacityMAXIn;}
+		if(req.body.descriptionIn) {project.description = req.body.descriptionIn;}
+		if(req.body.prerequisitesIn) {project.prerequisites = req.body.prerequisitesIn;}
+		if(req.body.disciplineIn) {project.discipline = req.body.disciplineIn;}
+		if(req.body.timeSubmittedIn) {project.timeStamp = req.body.timeSubmittedIn;} //this is going to update the timestamp on an edit but its easy to just leave as the timestamp when created
+		if(req.body.numAllocatedIn) {project.numAllocated = req.body.numAllocatedIn;}
+
+		project.save(function(err){
 			if(err){
 			console.log(err);
 		}
 		else console.log("Success");
 		}).then();
+
+	});
+}
+exports.editRowStudent = function(req, res){
+	var row = req.body.rowID;
+	Student.findOne({'_id': row}, function(err, student){
+		if(!student){
+			console.log('student is new!');
+			student = new Student();
+			student.firstName = "John";
+			student.lastName = "Doe";
+			student.studentID = "0";
+			student.phoneNumber = "04";
+			student.discipline = "None Specified";
+			student.wam = 0.0;
+			student.preferences = ["None","None","None","None","None","None"];
+			student.assignedProject=  "None";
+		}
+		if(req.body.fName) { student.firstName = req.body.fName; }
+		if(req.body.lName) {student.lastName = req.body.lName; }
+		if(req.body.pNumber) {student.phoneNumber = req.body.pNumber; }
+		if(req.body.disc) {student.discipline = req.body.disc; }
+		if(req.body.ID) {student.studentID = req.body.ID; }
+		if(req.body.wamInput) {student.wam = req.body.wamInput; }
+		if(req.body.pref1) {student.preferences[0] = req.body.pref1; }
+		if(req.body.pref2) {student.preferences[1] = req.body.pref2; }
+		if(req.body.pref3) {student.preferences[2] = req.body.pref3; }
+		if(req.body.pref4) {student.preferences[3] = req.body.pref4; }
+		if(req.body.pref5) {student.preferences[4] = req.body.pref5; }
+		if(req.body.pref6) {student.preferences[5] = req.body.pref6; }
+		if(req.body.projAlloc) {student.assignedProject = req.body.projAlloc; }
+
+		console.log(student);
+		student.markModified("preferences");
+		student.save(function(err){
+			if(err){
+			console.log(err);
+		}
+		else{ console.log("Success save");}
+		}).then();
+
+
+				Project.findOne({"title": req.body.oldProject}, function(err, project){
+			if(project) {
+				project.numAllocated--;
+				project.save(function(err){
+					if(err){
+						console.log(err);
+					}
+					else console.log("Success change");
+					});
+				}
+				else {console.log("no project found");
+						console.log(req.body.oldProject);
+						}
+		});
+		Project.findOne({"title": req.body.projAlloc}, function(err, project){
+			if(project) {
+				project.numAllocated++;
+				project.save(function(err){
+				if(err){
+					console.log(err);
+				}
+				else console.log("Success change");
+				});
+			}
+		});
 
 				return;
 	});
@@ -139,11 +238,11 @@ exports.editRow = function(req, res){
 	console.log("new row added");
 }
 
-var remove = function(rowNumber){
-	Student.find({'_id': row}).exec(function(err, doc){
-				console.log(JSON.stringify(doc));
-				//doc.remove();
-			});
-	Student.find({'_id': row}).remove().exec();
-}
-// Display Student Front End
+// var remove = function(rowNumber){
+// 	Student.find({'_id': row}).exec(function(err, doc){
+// 				console.log(JSON.stringify(doc));
+// 				//doc.remove();
+// 			});
+// 	Student.find({'_id': row}).remove().exec();
+// }
+// // Display Student Front End
