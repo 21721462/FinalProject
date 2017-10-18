@@ -1,43 +1,77 @@
 var Student = require('../models/studentModel');
 var Project = require('../models/projectModel');
+var Coordinator = require('../models/coordinatorModel');
 var node_xj = require('xls-to-json');
 var csv = require('csvtojson');
 var converter = require('csvtojson').Converter;
+var path = require('path');
 
 var SWAM;
 var error = "";
 var preferror = "";
+var dueTime;
 
-const csvFilePath = __dirname + '/ex.csv';
 
+const csvFilePath =  path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv");
+
+console.log(path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv"));
+
+console.log()
 var conv = new converter({});
 
 conv.fromFile(csvFilePath, function (err, result)
 	{
 		if (err)
 		{
-
+			console.log("Cannot access csv csvFile");
 		}
 
 		SWAM = result;
 		console.log(SWAM);
 	});
 
+
+function getTime()
+{
+	Coordinator.find({}, function (err, dueDate)
+		{
+			dueTime = dueDate[0].cutDate;
+		});
+}
+
+
 exports.studentRegisterGet = function(req, res, next) 
 {
-	Project.find({}).sort({'discipline': 1}).exec(function (err, proj)
+	getTime();
+	
+	var Time = new Date().toLocaleDateString();
+	var TempTime = Date.parse(Time);
+
+	
+	console.log(dueTime);
+	console.log(TempTime);
+
+	if (dueTime < TempTime)
 	{
-		if (err)
+		res.status(400).send("You can no longer sumbit your project preferences, please contact the unit coordinator for more information.");
+	}
+	else 
+	{
+		Project.find({}).sort({'discipline': 1}).exec(function (err, proj)
 		{
-			res.status(400).send("Could not access project list");
-		}
-		else 
-		{
-			res.render('StudentFrontEnd', {title: 'Student Project Allocation From', projects : proj, err: error, preferrs : preferror});
-			error = "";
-			preferror = "";
-		}
-	});
+			if (err)
+			{
+				res.status(400).send("Could not access project list");
+			}
+			else 
+			{
+				res.render('StudentFrontEnd', {title: 'Student Project Allocation From', projects : proj, err: error, preferrs : preferror});
+				error = "";
+				preferror = "";
+				//dueTime = null;
+			}
+		});
+	}
 }
 
 exports.studentRegisterPost = function(req, res, next) 
