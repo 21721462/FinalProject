@@ -37,7 +37,12 @@ html
         		form(action='', method='POST') 
          		 label Update Password 
           		 input(type='text', name = 'passupdate', required) 
-         		 input.buttonType(type='submit', value='Submit')	
+         		 input.buttonType(type='submit', value='Submit')
+			 
+			form(ref='csvForm', id='csvForm', action='/coordinator/upload', method='POST', enctype='multipart/form-data')
+          		 label Student WAM data 
+          		 input(type='file', name='csvFile')
+         		 input(type='submit', value='Upload')
 			 
 			button#studentButton.tabLinks(onclick="openTab(event, 'StudentPreferences')",) Student Preferences
 			button#projectButton.tabLinks(onclick="openTab(event, 'ProjectList')") Project List
