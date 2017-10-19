@@ -5,25 +5,13 @@ body {
 }
 
 
-#Tabs .tabLinks li.selected a {
-background-color: aqua;
-}
-
-
-div.dataTables_wrapper {
-        width: 100%;
-        margin: 0 auto;
-        overflow: scroll;
-}
-
 .mainheader {
     display: block;
     top: 0;
     left: 0;
     position: relative;
     overflow: hidden;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0 auto;
     width: 100%;
     height: auto;
     border: none;
@@ -43,7 +31,7 @@ div.dataTables_wrapper {
 
 .header_BG {
     width: 170%; 
-    //height: 93px;
+    height: 19%;
     margin-top: -56px;
     margin-left: -30%;
 }
@@ -112,6 +100,7 @@ input.delete {
     font-weight: 600;
     margin: 0;
     padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .pageSubTitle {
@@ -121,7 +110,8 @@ input.delete {
     border-left: 15px solid #ce7019;
     padding-left: 25px;
     margin-top: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
+    z-index: 2;
 }
 
 .pageSubTitle h1 {
@@ -175,36 +165,6 @@ button:hover {
     color: #564C23;
 }
 
-button.selected {
-    background-color: #eadead;
-    color: #564C23;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-left: 0%;
-    margin-right: 0%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-table tr:nth-child(even) {
-   background-color: #f5f5f5;
-}
-
-table th{
-    background-color: #d9e6f2;
-    cursor:pointer;
-}
-
-th:hover {
-    background-color: #c3cfd9;
-}
 
 #projNum
 {
@@ -254,12 +214,95 @@ th:hover {
 
 .buttonType:hover
 {
+
     background-color: yellow; 
 }
 
-button.selected
+.discClass label
 {
-background-color: #eadead;
-color: #564C23
+    display: inline-block;
+    width: 120px;
+}
+
+.projclass label
+{
+    display: inline-block;
+    width: 150px;
+}
+
+.persClass label
+{
+    display: inline-block;
+    width: 150px;
+}
+
+.AcademicForm1 label
+{
+    display: inline-block;
+    width: 180px;
+}
+
+.projDiscClass label
+{
+    display: inline-block;
+    width: 120px;
+}
+
+/*Made for each tab to stay highlighted when that tab is active*/
+button.selected {
+    background-color: #eadead;
+    color: #564C23;
+}
+
+/*Use for wrapping the datatable then below is for horiztontal scrolling*/
+div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+}
+
+.dataTables_scroll
+{
+    overflow:auto;
+}
+
+table.mainTables {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+table.expandTable {
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    overflow:auto;
+    
+}
+
+
+
+table.maintables>thead>tr>th ,table.maintables>tbody>tr>td {
+    border: 1px solid black;
+}
+
+
+table.mainTables>tbody>tr>td, table.expandTable>tbody>tr>td {
+   background-color: #f5f5f5;
+}
+
+table.mainTables th, table.expandTable th{
+    background-color: #d9e6f2;
+    cursor:pointer;
+}
+
+td.details-control {
+    background: url('http://co.clayton.ga.us/images/Mobile/plus.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('https://static.wefut.com/assets/images/red_minus.png') no-repeat center center;
 }
 
