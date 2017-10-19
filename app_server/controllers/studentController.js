@@ -15,10 +15,9 @@ var dueTime;
 const csvFilePath =  path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv");
 
 console.log(path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv"));
-
-console.log()
 var conv = new converter({});
 
+//Check if csv file has been uploaded by Unit Coordinator, and fetch student WAMS
 conv.fromFile(csvFilePath, function (err, result)
 	{
 		if (err)
@@ -27,10 +26,11 @@ conv.fromFile(csvFilePath, function (err, result)
 		}
 
 		SWAM = result;
-		console.log(SWAM);
+		
+
 	});
 
-
+// Set up submission due date 
 function getTime()
 {
 	Coordinator.find({}, function (err, dueDate)
@@ -39,7 +39,7 @@ function getTime()
 		});
 }
 
-
+// Display Student submission page
 exports.studentRegisterGet = function(req, res, next) 
 {
 	getTime();
@@ -47,13 +47,9 @@ exports.studentRegisterGet = function(req, res, next)
 	var Time = new Date().toLocaleDateString();
 	var TempTime = Date.parse(Time);
 
-	
-	console.log(dueTime);
-	console.log(TempTime);
-
 	if (dueTime < TempTime)
 	{
-		res.status(400).send("You can no longer sumbit your project preferences, please contact the unit coordinator for more information.");
+		res.status(400).send("You can no longer submit your project preferences, please contact the unit coordinator for more information.");
 	}
 	else 
 	{
@@ -68,7 +64,7 @@ exports.studentRegisterGet = function(req, res, next)
 				res.render('StudentFrontEnd', {title: 'Student Project Allocation From', projects : proj, err: error, preferrs : preferror});
 				error = "";
 				preferror = "";
-				//dueTime = null;
+				
 			}
 		});
 	}
@@ -80,22 +76,15 @@ exports.studentRegisterPost = function(req, res, next)
 
 	var fname = req.body.firstName;
 	
-	
 	var lname = req.body.lastName;
 	
-
 	var sID = req.body.studentID;
 	
-
 	var phoneNum = req.body.studentPhoneNumber;
 	
 	var studentDiscipline = req.body.discipline;
 
 	var studentPreferences = req.body.options;
-
-	//console.log(sID);
-
-	//console.log(SWAM[5].Person_ID);
 
 	var studentWam = 0;
 
@@ -104,31 +93,9 @@ exports.studentRegisterPost = function(req, res, next)
 		if (SWAM[w].Person_ID == sID)
 		{
 			studentWam = SWAM[w].Course_WAM; 
-			console.log(SWAM[w].Course_WAM);
 		}
 	}
 	
-	// Student.find({studentID : sID}, function(err, studentCheck)
-	// {
-	// 	if(studentCheck.length)
-	// 	{
-	// 		error = "This student has already been registered.";
-	// 		return res.redirect('back');
-
-	// 	}
-	// })
-
-	// Student.find({phoneNumber : phoneNum}, function(err, phoneCheck)
-	// {
-	// 	if(phoneCheck.length)
-	// 	{
-	// 		error = "This phone number has been taken.";
-	// 		return res.redirect('back');
-
-	// 	}
-	// })
-
-	console.log(req.body);
 	var noneCount = 0;
 	var prefCheck = Object.create(null);
 	for (p in studentPreferences)
@@ -157,7 +124,7 @@ exports.studentRegisterPost = function(req, res, next)
 		return res.redirect('back');
 	}
 
-	Student.findOne({studentID : sID}, function(err, studentCheck){
+	Student.findOne({studentID : sID,firstName:fname}, function(err, studentCheck){
 		if(!studentCheck){
 			studentCheck = new Student();
 		}
@@ -179,11 +146,10 @@ exports.studentRegisterPost = function(req, res, next)
         return res.redirect('back');
       		})
 		.catch(err => {
-			res.status(400).send("Student not save correctly");
+			res.status(400).send("Student has not been saved. Please check your details and try again!");
 		});
 	});
 	}
-
 
 
 
