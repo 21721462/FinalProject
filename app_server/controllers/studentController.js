@@ -93,9 +93,9 @@ exports.studentRegisterPost = function(req, res, next)
 
 	var studentPreferences = req.body.options;
 
-	console.log(sID);
+	//console.log(sID);
 
-	console.log(SWAM[5].Person_ID);
+	//console.log(SWAM[5].Person_ID);
 
 	var studentWam = 0;
 
@@ -108,25 +108,25 @@ exports.studentRegisterPost = function(req, res, next)
 		}
 	}
 	
-	Student.find({studentID : sID}, function(err, studentCheck)
-	{
-		if(studentCheck.length)
-		{
-			error = "This student has already been registered.";
-			return res.redirect('back');
+	// Student.find({studentID : sID}, function(err, studentCheck)
+	// {
+	// 	if(studentCheck.length)
+	// 	{
+	// 		error = "This student has already been registered.";
+	// 		return res.redirect('back');
 
-		}
-	})
+	// 	}
+	// })
 
-	Student.find({phoneNumber : phoneNum}, function(err, phoneCheck)
-	{
-		if(phoneCheck.length)
-		{
-			error = "This phone number has been taken.";
-			return res.redirect('back');
+	// Student.find({phoneNumber : phoneNum}, function(err, phoneCheck)
+	// {
+	// 	if(phoneCheck.length)
+	// 	{
+	// 		error = "This phone number has been taken.";
+	// 		return res.redirect('back');
 
-		}
-	})
+	// 	}
+	// })
 
 	console.log(req.body);
 	var noneCount = 0;
@@ -171,6 +171,21 @@ exports.studentRegisterPost = function(req, res, next)
 	}
 
 	var myStudent = new Student(StudentUser);
+	Student.find({studentID : sID}, function(err, studentCheck){
+	if (studentCheck.length) {
+	var upData= myStudent.toObject();
+	delete upData._id;
+
+	Student.update({_id:myStudent.id},upData,{upsert:true},function(err,doc)
+	{
+		if(err)
+		{
+			console.log("Could not update student details");
+		}
+		return res.redirect('back');
+	})
+	}
+	else
 	myStudent.save()
 	.then(item => {
       error = "Student has been successfully saved.";
@@ -178,8 +193,12 @@ exports.studentRegisterPost = function(req, res, next)
     		})
     .catch(err => {
       res.status(400).send("Student not save correctly");
-    });
-}
+    })
+})}
+
+
+
+
 
 
 
