@@ -1,0 +1,36 @@
+html
+  head
+    title Student Project Allocation Form
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/genCSS.css')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/coordinatorFrontEnd.css')
+    script(src='/javascripts/coordinatorFrontEnd.js')
+    script(src='//code.jquery.com/jquery-1.12.4.js')
+    script(src='https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js')
+    script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js')
+    script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js')
+    script(src='//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js')
+    script(src='https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js')
+    script(src="/javascripts/script.js")
+
+  body
+    div
+      .mainheader
+        img.header_BG(src='https://secure.csse.uwa.edu.au/newcss/graphics/header-background-02.jpg', alt='')
+        img.UWALogo(src='https://secure.csse.uwa.edu.au/newcss/graphics/uwacrest.png', alt='UWA LOGO')
+        h1 Faculty of Engineering and Mathematical Sciences
+        .pageTitle
+          h2 BE and MPE Final Year Project
+      .pageSubTitle
+        h1 Coordinator Tools
+        p #{error}
+        form(action='', method='POST')
+            label Input password  
+            input(type='text', name= 'password', required)
+            input(type='submit', value= 'Submit')
+        br
