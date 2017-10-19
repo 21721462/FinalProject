@@ -1,0 +1,111 @@
+html
+    head
+        title Student Projects Allocation Form
+        link(rel='stylesheet', href='/stylesheets/genCSS.css')
+        link(rel='stylesheet', type='text/css', href='/stylesheets/coordinatorFrontEnd.css')
+        link(href='https://fonts.googleapis.com/css?family=Ubuntu', rel='stylesheet')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        script(src='studentFrontEnd.js')
+        
+    body
+        .mainheader
+            img.header_BG(src='https://secure.csse.uwa.edu.au/newcss/graphics/header-background-02.jpg', alt='')
+            img.UWALogo(src='https://secure.csse.uwa.edu.au/newcss/graphics/uwacrest.png', alt='UWA LOGO')
+            h1 Faculty of Engineering and Mathematical Sciences
+            .pageTitle
+                h2 BE and MPE Engineering Research Project
+        .pageSubTitle
+                h1 Student Registration form 
+        form.AcademicForm1(action='', method='POST')
+            fieldset.projectField
+                p#errorprint #{err}
+                legend Personal Details
+                .persClass
+                    label First Name: 
+                    input#firstName(type='text', name='firstName', required)
+                    br
+                    br
+                    label Last Name: 
+                    input#lastName(type='text', name='lastName', required)
+                    br
+                    br
+                    label Student Number: 
+                    input#studentID(type='number', name='studentID', maxlength='8', size='8', required)
+                    br
+                    br
+                    label Phone Number: 
+                    input#studentPhoneNumber(type='text', name='studentPhoneNumber', minlength='10', maxlength='12', required)
+                    br
+                    br
+                    label.disclabel Discipline: 
+                    br
+                .discClass
+                    input#discipline(type='radio', name='discipline', value='Electrical', required)
+                    label Electrical 
+                    input#discipline(type='radio', name='discipline', value='Mechanical', required)
+                    label Mechanical 
+                    input#discipline(type='radio', name='discipline', value='Chemical', required)
+                    label Chemical 
+                    input#discipline(type='radio', name='discipline', value='Software', required)
+                    label Software 
+                    input#discipline(type='radio', name='discipline', value='Civil', required)
+                    label Civil
+                    br 
+                    input#discipline(type='radio', name='discipline', value='Environmental', required)
+                    label Environmental 
+                    input#discipline(type='radio', name='discipline', value='Petroleum', required)
+                    label Petroleum
+                    input#discipline(type='radio', name='discipline', value='Oilandgas', required)
+                    label Oil & Gas
+                    input#discipline(type='radio', name='discipline', value='Mining', required)
+                    label Mining
+                    input#discipline(type='radio', name='discipline', value='Materials', required)
+                    label Materials
+            fieldset.projectField
+                legend Projects Preferences
+                p #{preferrs}
+                .projClass
+                    
+
+                    label First Preference:
+                    select(name='options', required)
+                        option(value='None', required) Pick Your Preference
+                         each o in projects
+                            option(value=o.title) #{o.discipline} #{o.title} 
+                    br
+                    br
+                    label Second Preference:
+                    select(name='options')
+                        option(value='None') Pick Your Preference
+                         each o in projects
+                            option(value=o.title) #{o.discipline} #{o.title} 
+                    br
+                    br
+                    label Third Preference:
+                    select(name='options', required)
+                        option(value='None') Pick Your Preference:
+                         each o in projects
+                            option(value=o.title) #{o.discipline} #{o.title} 
+                    br
+                    br
+                    label Fourth Preference:
+                    select(name='options', required)
+                        option(value='None') Pick Your Preference
+                         each o in projects
+                            option(value=o.title) #{o.discipline} #{o.title} 
+                    br
+                    br
+                    label Fifth Preference:
+                    select(name='options', required)
+                        option(value='None') Pick Your Preference
+                         each o in projects
+                            option(value=o.title) #{o.discipline} #{o.title} 
+                    br
+                    br
+                    label Sixth Preference:
+                    select(name='options', required)
+                        option(value='None') Pick Your Preference
+                         each o in projects
+                            option(value=o.title) #{o.discipline} #{o.title}
+            input.buttonType(type='submit', value='Submit')
+            input.buttonType(type='reset', value='Reset')
