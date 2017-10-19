@@ -47,11 +47,11 @@ html
             input#Supervisor3(type='text', name='Supervisor5')
             br
             br
-            label Minimum Capacity of Project: 
+            label Minimum Capacity: 
             input#capacityProj(size='5', type='number', min='1', name='capacityProjMIN', required)
             br
             br
-            label Maximum Capacity of Project: 
+            label Maximum Capacity: 
             input#capacityProj(size='5', type='number', name='capacityProjMAX', required)
             br
             br
@@ -67,28 +67,29 @@ html
             br
             label Discipline: 
             br
-            input#discipline(type='checkbox', name='discipline', value='Electrical')
-            |  Electrical & Electronic
-            input#discipline(type='checkbox', name='discipline', value='Materials')
-            |  Materials
-            input#discipline(type='checkbox', name='discipline', value='Mechanical')
-            |  Mechanical
-            input#discipline(type='checkbox', name='discipline', value='Civil')
-            |  Civil
-            input#discipline(type='checkbox', name='discipline', value='Chemical')
-            |  Chemical 
-            br
-            input#discipline(type='checkbox', name='discipline', value='Software')
-            | Software
-            input#discipline(type='checkbox', name='discipline', value='Environmental')
-            |  Environmental
-            input#discipline(type='checkbox', name='discipline', value='Petroleum')
-            |  Petroleum
-            input#discipline(type='checkbox', name='discipline', value='Oilandgas')
-            |  Oil & Gas
-            input#discipline(type='checkbox', name='discipline', value='Mining')
-            |  Mining
-            br
+            .projDiscClass
+                input#discipline(type='checkbox', name='discipline', value='Electrical')
+                label Electrical & Electronic
+                input#discipline(type='checkbox', name='discipline', value='Materials')
+                label Materials
+                input#discipline(type='checkbox', name='discipline', value='Mechanical')
+                label Mechanical
+                input#discipline(type='checkbox', name='discipline', value='Civil')
+                label Civil
+                input#discipline(type='checkbox', name='discipline', value='Chemical')
+                label Chemical 
+                br
+                input#discipline(type='checkbox', name='discipline', value='Software')
+                label Software
+                input#discipline(type='checkbox', name='discipline', value='Environmental')
+                label Environmental
+                input#discipline(type='checkbox', name='discipline', value='Petroleum')
+                label Petroleum
+                input#discipline(type='checkbox', name='discipline', value='Oilandgas')
+                label Oil & Gas
+                input#discipline(type='checkbox', name='discipline', value='Mining')
+                label Mining
+                br
             br
             input.buttonType(type='submit', value='Submit')
             input.buttonType(type='reset', value='Reset')  
