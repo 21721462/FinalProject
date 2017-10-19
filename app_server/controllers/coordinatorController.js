@@ -4,10 +4,21 @@ var Coordinator = require('../models/coordinatorModel');
 var Student = require('../models/studentModel');
 var Project = require('../models/projectModel');
 var validator = require('validator');
-var Grid = require('editable-grid')
-$ = require('jquery');
+var Grid = require('editable-grid');
+var nodemailer = require('nodemailer');
+var fileUpload = require('express-fileupload');
 
 
+
+
+// var emailer = nodemailer.createTransport({
+// 	service: 'gmail'
+// 	{
+// 		auth: {
+			
+// 		}
+// 	}
+// })
 var cuttoffDateTEMP;
 var passthroughDate;
 var CoordinatorPass;
@@ -43,6 +54,8 @@ exports.coordinatorLoginGet = function(req, res, next) {
 
 exports.cooridnatorLoginPost = function(req, res, next)
 {
+	console.log(CoordinatorPass);
+	console.log(req.body.password);
 	if (CoordinatorPass == req.body.password)
 	{
 		res.redirect('/coordinator');
@@ -55,13 +68,19 @@ exports.cooridnatorLoginPost = function(req, res, next)
 
 exports.setdueDate = function(req, res, next)
 {
+
+	
+	
+
+	console.log(passthroughDate);
+	console.log(req.body.password);
 	if (req.body.passupdate == undefined && req.body.cuttoff != undefined)
 	{
 		var fullDate = req.body.cuttoff;
 		var milliDate = Date.parse(fullDate);
 		var cuttoffDateTEMP1 = new Date(parseInt(milliDate, 10));
 		cuttoffDateTEMP = cuttoffDateTEMP1.toString();
-		console.log("HERE2");
+		
 		var dateStore = {
 			cutDate : milliDate,
 			password: CoordinatorPass
@@ -70,7 +89,6 @@ exports.setdueDate = function(req, res, next)
 	}
 	else if(req.body.passupdate != undefined && req.body.cuttoff == undefined)
 	{
-		console.log("HERE3");
 		console.log(passthroughDate);
 		console.log(req.body.passupdate);
 		var dateStore = {
@@ -92,7 +110,10 @@ exports.setdueDate = function(req, res, next)
 		}
 		return res.redirect('back');
 	});
+	
+
 }
+
 
 exports.allocateProjects = function (req, res) {
 	Project.update({}, { $set: { numAllocated: "0" }}, {multi: true}, function (err) {if(err) return handleError(err);}); //Reset numAlloc
@@ -165,8 +186,8 @@ exports.editRowProject = function(req, res){
 			project.supervisor5 = "None"; 
 			project.capacityMIN = 0;
 			project.capacityMAX = 10;
-			project.description = "None";
-			project.prerequisites = "None";
+			project.description = "None"
+			project.prerequisites = "None"
 			project.discipline = ["None"]; //[{type: String, unique: false, required: false}],
 			project.timeStamp = new Date().toLocaleString().toString();
 			project.numAllocated = 0;
@@ -181,7 +202,7 @@ exports.editRowProject = function(req, res){
 		if(req.body.capacityMAXIn) {project.capacityMAX = req.body.capacityMAXIn;}
 		if(req.body.descriptionIn) {project.description = req.body.descriptionIn;}
 		if(req.body.prerequisitesIn) {project.prerequisites = req.body.prerequisitesIn;}
-		if(req.body.disciplineIn) {project.discipline = req.body.disciplineIn;}
+		if(req.body.disciplineIn) {project.discipline = req.body.disciplineIn.split(",");}
 		if(req.body.timeSubmittedIn) {project.timeStamp = req.body.timeSubmittedIn;} //this is going to update the timestamp on an edit but its easy to just leave as the timestamp when created
 		if(req.body.numAllocatedIn) {project.numAllocated = req.body.numAllocatedIn;}
 
@@ -261,38 +282,5 @@ exports.editRowStudent = function(req, res){
 
 				return;
 	});
-// 	var sID = req.body.ID;
-// 	var lNameLocal = req.body.lName;
-// 	var fNameLocal = req.body.fName;
-// 	var projectAllocation = req.body.projAlloc;
-// 	//console.log("variables collected");
-// 	console.log(sID);
-// 	console.log(lNameLocal);
-// 	console.log(fNameLocal);
-// 	var newData = {
-// 		firstName: fNameLocal,
-// 		lastName: lNameLocal,
-// 		studentID: sID
-// 	}
-// 	var toSend = new Student(newData);
-// 	toSend.save(function(err){
-//       if(err){
-//            console.log(err);
-//            return;
-//       }
-
-//       res.json({ token: generateToken(user), user: user });
-// });
-
-	//Student.add({firstName: fNameLocal, lastName: lNameLocal, studentID: sID}).exec();//, assignedProject: projectAllocation})
 	console.log("new row added");
 }
-
-// var remove = function(rowNumber){
-// 	Student.find({'_id': row}).exec(function(err, doc){
-// 				console.log(JSON.stringify(doc));
-// 				//doc.remove();
-// 			});
-// 	Student.find({'_id': row}).remove().exec();
-// }
-// // Display Student Front End
