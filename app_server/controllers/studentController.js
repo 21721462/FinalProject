@@ -177,7 +177,7 @@ exports.studentRegisterPost = function(req, res, next)
 		});
 	});
 	
-	return;
+	return res.redirect('back');;
 	}
 
 
