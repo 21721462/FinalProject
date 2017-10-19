@@ -192,6 +192,14 @@ button:hover {
     color: green;
     background-color: #F2EDD9;
 }
+.errorprint
+{
+
+    font-size: 30px;
+    font-weight: bold;
+    color: green;
+    background-color: #F2EDD9;
+}
 
 .projectField
 {
