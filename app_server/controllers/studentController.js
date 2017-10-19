@@ -157,46 +157,28 @@ exports.studentRegisterPost = function(req, res, next)
 		return res.redirect('back');
 	}
 
-	
-	
-	var StudentUser = {
-		firstName: fname,
-		lastName: lname,
-		studentID: sID,
-		phoneNumber: phoneNum,
-		discipline: studentDiscipline,
-		wam: studentWam,
-		preferences: studentPreferences,
-		assignedProject: ""
-	}
-
-	var myStudent = new Student(StudentUser);
-	Student.find({studentID : sID}, function(err, studentCheck){
-	if (studentCheck.length) {
-	var upData= myStudent.toObject();
-	delete upData._id;
-
-	Student.update({_id:myStudent.id},upData,{upsert:true},function(err,doc)
-	{
-		if(err)
-		{
-			console.log("Could not update student details");
+	Student.findOne({studentID : sID}, function(err, studentCheck){
+		if(!studentCheck){
+			studentCheck = new Student();
 		}
-		return res.redirect('back');
-	})
+			studentCheck.firstName = fname;
+			studentCheck.lastName = lname;
+			studentCheck.studentID = sID;
+			studentCheck.phoneNumber = phoneNum;
+			studentCheck.discipline = studentDiscipline;
+			studentCheck.wam = studentWam;
+			studentCheck.preferences = studentPreferences;
+			studentCheck.assignedProject = "";
+			studentCheck.save(function(err){
+			if(err){
+			console.log(err);
+		}
+		else console.log("Success");
+		});
+	});
+	
+	return;
 	}
-	else
-	myStudent.save()
-	.then(item => {
-      error = "Student has been successfully saved.";
-      return res.redirect('back');
-    		})
-    .catch(err => {
-      res.status(400).send("Student not save correctly");
-    })
-})}
-
-
 
 
 
