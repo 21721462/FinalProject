@@ -74,10 +74,10 @@ html
                 td.studNum(value=o.studentID) #{o.studentID}
                 td.fName(value=o.firstName) #{o.firstName}
                 td.lname(value=o.lastName) #{o.lastName}
-								if o.phoneNumber.toString().length == 9
-									td.pNum(value=o.phoneNumber) 0#{o.phoneNumber}
-								else
-									td.pNum(value=o.phoneNumber) #{o.phoneNumber}
+                if o.phoneNumber.toString().length == 9
+                    td.pNum(value=o.phoneNumber) 0#{o.phoneNumber}
+                else
+                    td.pNum(value=o.phoneNumber) #{o.phoneNumber}
                 td.mark(value=o.wam) #{o.wam}
                 td.disc(value=o.discipline) #{o.discipline}
                 td.pref1(value=o.preferences[0]) #{o.preferences[0]}
@@ -143,10 +143,10 @@ html
               td(value=o.studentID) #{o.studentID}
               td(value=o.firstName) #{o.firstName}
               td(value=o.lastName) #{o.lastName}
-							if o.phoneNumber.toString().length == 9
-							  td(value=o.phoneNumber) 0#{o.phoneNumber}
-							else
-								td(value=o.phoneNumber) #{o.phoneNumber}
+              if o.phoneNumber.toString().length == 9
+                td(value=o.phoneNumber) 0#{o.phoneNumber}
+              else
+                 td(value=o.phoneNumber) #{o.phoneNumber}
 
               td(value=o.assignedProject) #{o.assignedProject}
               td
