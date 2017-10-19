@@ -174,10 +174,14 @@ exports.studentRegisterPost = function(req, res, next)
 			console.log(err);
 		}
 		else console.log("Success");
+		}).then(item => {
+        error = "Student has been successfully saved.";
+        return res.redirect('back');
+      		})
+		.catch(err => {
+			res.status(400).send("Student not save correctly");
 		});
 	});
-	
-	return res.redirect('back');;
 	}
 
 
