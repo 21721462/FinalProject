@@ -32,7 +32,7 @@ function getTime()
 exports.studentRegisterGet = function(req, res, next) 
 {
 	//Check if csv file has been uploaded by Unit Coordinator, and fetch student WAMS
-conv.fromFile(csvFilePath, function (err, result)
+	conv.fromFile(csvFilePath, function (err, result)
 	{
 		if (err)
 		{
@@ -40,8 +40,6 @@ conv.fromFile(csvFilePath, function (err, result)
 		}
 
 		SWAM = result;
-		
-
 	});
 	getTime();
 	
