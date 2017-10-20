@@ -2,22 +2,22 @@ var Project = require('../models/projectModel');
 
 
 var errormsg = "";
+
+//Display Project subbmission page
 exports.academicPageGet = function(req, res, next)
 {
 	res.render('AcademicFrontEnd', {title: 'Academic', error: errormsg});
 	errormsg = "";
 }
 
-// WORKING
+
 exports.academicPagePost = function(req, res, next)
 {
 	var ProjectTitle =  req.body.projTitle;
 	
 	var superVisor = req.body.Supervisor1;
-	
 
 	var superVisor2 = req.body.Supervisor2;
-	
 
 	var superVisor3 = req.body.Supervisor3;
 
@@ -25,14 +25,9 @@ exports.academicPagePost = function(req, res, next)
 
 	var superVisor5 = req.body.Supervisor5;
 	
-
 	var ProjectCapacityMIN = req.body.capacityProjMIN;
 
 	var ProjectCapacityMAX = req.body.capacityProjMAX;
-	
-
-	console.log(req.body);
-
 
 	var ProjectDesc = req.body.projectDescription;
 
@@ -67,10 +62,10 @@ exports.academicPagePost = function(req, res, next)
 	var myProject = new Project(ProjectUpload);
 	myProject.save()
 	.then(item => {
-	  errormsg = "Project saved successfully";
+	  errormsg = "Project has been saved successfully";
       return res.redirect('back');
     		})
     .catch(err => {
-      res.status(400).send("Project not save correctly");
+      res.status(400).send("Project has not been saved successfully");
     });
 }
