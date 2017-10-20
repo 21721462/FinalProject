@@ -4,7 +4,7 @@ Completed: Semester 2 2017
 Team Members:
 
 Nicholas Gene Mitchell
-Yau Shing Huang
+Kevin Huang
 Eliezer Z'Ev Karotkin
 Konrad Wojtek Obara
 Yasin Odabas	
