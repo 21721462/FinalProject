@@ -15,7 +15,6 @@ var dueTime;
 const csvFilePath =  path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv");
 
 console.log(path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv"));
-var conv = new converter({});
 
 
 
@@ -31,6 +30,7 @@ function getTime()
 // Display Student submission page
 exports.studentRegisterGet = function(req, res, next) 
 {
+	var conv = new converter({});
 	//Check if csv file has been uploaded by Unit Coordinator, and fetch student WAMS
 	conv.fromFile(csvFilePath, function (err, result)
 	{
@@ -40,6 +40,9 @@ exports.studentRegisterGet = function(req, res, next)
 		}
 
 		SWAM = result;
+		console.log(SWAM);
+		
+
 	});
 	getTime();
 	
