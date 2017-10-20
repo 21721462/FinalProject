@@ -17,18 +17,7 @@ const csvFilePath =  path.resolve(__dirname, "..", "..", "public", "uploads", "c
 console.log(path.resolve(__dirname, "..", "..", "public", "uploads", "csvFile.csv"));
 var conv = new converter({});
 
-//Check if csv file has been uploaded by Unit Coordinator, and fetch student WAMS
-conv.fromFile(csvFilePath, function (err, result)
-	{
-		if (err)
-		{
-			console.log("Cannot access csv csvFile");
-		}
 
-		SWAM = result;
-		
-
-	});
 
 // Set up submission due date 
 function getTime()
@@ -42,6 +31,18 @@ function getTime()
 // Display Student submission page
 exports.studentRegisterGet = function(req, res, next) 
 {
+	//Check if csv file has been uploaded by Unit Coordinator, and fetch student WAMS
+conv.fromFile(csvFilePath, function (err, result)
+	{
+		if (err)
+		{
+			console.log("Cannot access csv csvFile");
+		}
+
+		SWAM = result;
+		
+
+	});
 	getTime();
 	
 	var Time = new Date().toLocaleDateString();
