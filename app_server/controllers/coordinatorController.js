@@ -114,7 +114,6 @@ exports.setdueDate = function(req, res, next)
 
 }
 
-
 exports.allocateProjects = function (req, res) {
 	Project.update({}, { $set: { numAllocated: "0" }}, {multi: true}, function (err) {if(err) return handleError(err);}); //Reset numAlloc
 	Student.update({}, { $set: { assignedProject: "" }}, {multi: true},function (err) {if(err) return handleError(err);}); //Reset assignedProj
@@ -124,13 +123,14 @@ exports.allocateProjects = function (req, res) {
 			if(perr) return perr;
 			//console.log(projects);
 			for(var student of students) {
-				console.log(student.firstName, student.preferences);
+				console.log(student.firstName, student.preferences); //DEBUG
 				var allocated = false;
 				for(var pref of student.preferences) {
 					//console.log(student.firstName, pref);
 					for(var project of projects) {
 						if(pref == project.title) {
-							if(project.discipline.includes(student.discipline)) {
+							for(var i = 0; i < project.discipline.length; i++) project.discipline[i].toLowerCase();
+							if(project.discipline.includes(student.discipline.toLowerCase())) {
 								if(project.numAllocated < project.capacityMAX) {
 									student.assignedProject = project.title; //DEBUG
 									project.numAllocated++;
