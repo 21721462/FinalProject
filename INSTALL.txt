@@ -1,0 +1,20 @@
+Dependencies: NodeJS, NPM
+
+Place Project folder in desired location. 
+
+Automatic install and start:
+Open the folder and run the application: "runWindows.bat"
+This will install any missing files and start the server. This may take a few minutes. Once this has completed, you can direct to any of the three pages.
+
+Manual install and start:
+Open the folder and right click, an option should appear "Open command window here", click this.
+A command prompt window should appear, this has now been directed to the folder that the project is in. 
+
+Type in "npm install", this will update all the different modules we have used in our project so it will run correctly. This may take 1-2 minutes.
+After this has completed, type in "npm start". After a few seconds the server will be online, now you can direct to any of the three pages.
+
+Credentials:
+Coordinator Password Default: "password123"
+The database is stored on MLab:
+Username: CITS3200D
+Password: cits3200d123
