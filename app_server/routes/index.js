@@ -18,7 +18,6 @@ var storage = multer.diskStorage({
 });
 
 var uploadFile = multer({ storage : storage});
-
 var type = uploadFile.single('csvFile');
 
 var coordinatorController = require('../controllers/coordinatorController');
@@ -33,9 +32,11 @@ router.post('/coordinator/upload', type, coordinatorController.uploadcsv);
 
 router.get('/CoordinatorLogin', coordinatorController.coordinatorLoginGet);
 
-router.post('/CoordinatorLogin', coordinatorController.cooridnatorLoginPost);
+router.post('/CoordinatorLogin', coordinatorController.coordinatorLoginPost);
 
 router.get('/coordinator', coordinatorController.coordinatorLogin);
+
+router.post('/coordinator',coordinatorController.setdueDate);
 
 router.post('/coordinatordeleterowstudent', coordinatorController.deleteRowStudent);
 
@@ -51,14 +52,15 @@ router.post('/allocateProjects', coordinatorController.allocateProjects);
 Student Routes
 */
 
-
-// Get request for student form submission
 router.get('/student', studentController.studentRegisterGet);
-// Posts the form for students data to the DB
+
 router.post('/student', studentController.studentRegisterPost);
 
-
+/*
+Academic Routes
+*/
 router.get('/project', projectController.academicPageGet);
+
 router.post('/project', projectController.academicPagePost);
 
 module.exports = router;
