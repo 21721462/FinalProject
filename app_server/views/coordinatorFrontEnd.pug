@@ -145,11 +145,7 @@ html
               td(value=o.studentID) #{o.studentID}
               td(value=o.firstName) #{o.firstName}
               td(value=o.lastName) #{o.lastName}
-              if o.phoneNumber.toString().length == 9
-                td(value=o.phoneNumber) 0#{o.phoneNumber}
-              else
-                 td(value=o.phoneNumber) #{o.phoneNumber}
-
+              td(value=o.phoneNumber) #{o.phoneNumber}
               td(value=o.assignedProject) #{o.assignedProject}
               td
                 img.btnEditAllocate(src='http://www.stjohnpigeon.com/ministryinc/images/related/edit-icon.png')
