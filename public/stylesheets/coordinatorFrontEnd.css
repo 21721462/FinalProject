@@ -264,6 +264,11 @@ button:hover {
     width: 120px;
 }
 
+.highlight {
+    font-weight: bold;
+    color: red;
+}
+
 /*Made for each tab to stay highlighted when that tab is active*/
 button.selected {
     background-color: #eadead;
