@@ -211,7 +211,7 @@ exports.editRowProject = function(req, res){
 		if(req.body.capacityMAXIn) {project.capacityMAX = req.body.capacityMAXIn;}
 		if(req.body.descriptionIn) {project.description = req.body.descriptionIn;}
 		if(req.body.prerequisitesIn) {project.prerequisites = req.body.prerequisitesIn;}
-		if(req.body.disciplineIn) {project.discipline = req.body.disciplineIn.split(",").strip();}
+		if(req.body.disciplineIn) {project.discipline = req.body.disciplineIn.trim().split(",");}
 		if(req.body.timeSubmittedIn) {project.timeStamp = req.body.timeSubmittedIn;} //this is going to update the timestamp on an edit but its easy to just leave as the timestamp when created
 		if(req.body.numAllocatedIn) {project.numAllocated = req.body.numAllocatedIn;}
 
