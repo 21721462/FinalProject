@@ -52,7 +52,7 @@ exports.coordinatorLoginGet = function(req, res, next) {
 
 
 
-exports.cooridnatorLoginPost = function(req, res, next)
+exports.coordinatorLoginPost = function(req, res, next)
 {
 	console.log(CoordinatorPass);
 	console.log(req.body.password);
