@@ -70,8 +70,7 @@ html
               th
           tbody
             each o in students
-            -var notAllocated = o.assignedProject == ""
-              tr(id=o._id, for=o._id, name=o.id, class=notAllocated ? "highlight" : "")
+              tr(id=o._id, for=o._id, name=o.id)
                 td.studNum(value=o.studentID) #{o.studentID}
                 td.fName(value=o.firstName) #{o.firstName}
                 td.lname(value=o.lastName) #{o.lastName}
@@ -141,7 +140,8 @@ html
             th
         tbody
           each o in students
-            tr(id=o._id, for=o._id, name=o.id)
+            -var notAllocated = o.assignedProject == ""
+            tr(id=o._id, for=o._id, name=o.id, class=notAllocated ? "highlight" : "")
               td(value=o.studentID) #{o.studentID}
               td(value=o.firstName) #{o.firstName}
               td(value=o.lastName) #{o.lastName}
