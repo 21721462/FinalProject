@@ -48,6 +48,8 @@ router.post('/coordinatorsaverowproject', coordinatorController.editRowProject);
 
 router.post('/allocateProjects', coordinatorController.allocateProjects);
 
+router.post('/coordinatordeleteallentries', coordinatorController.deleteAllEntries);
+
 /*
 Student Routes
 */
