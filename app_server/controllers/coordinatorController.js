@@ -129,7 +129,7 @@ exports.allocateProjects = function (req, res) {
 					//console.log(student.firstName, pref);
 					for(var project of projects) {
 						if(pref == project.title) {
-							for(var i = 0; i < project.discipline.length; i++) project.discipline[i].toLowerCase();
+							for(var i = 0; i < project.discipline.length; i++) project.discipline[i] = project.discipline[i].toLowerCase();
 							if(project.discipline.includes(student.discipline.toLowerCase())) {
 								if(project.numAllocated < project.capacityMAX) {
 									student.assignedProject = project.title; //DEBUG
