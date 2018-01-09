@@ -13,8 +13,4 @@ A command prompt window should appear, this has now been directed to the folder 
 Type in "npm install", this will update all the different modules we have used in our project so it will run correctly. This may take 1-2 minutes.
 After this has completed, type in "npm start". After a few seconds the server will be online, now you can direct to any of the three pages.
 
-Credentials:
-Coordinator Password Default: "password123"
-The database is stored on MLab:
-Username: CITS3200D
-Password: cits3200d123
+
